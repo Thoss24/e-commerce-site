@@ -1,0 +1,41 @@
+.main-nav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.nav {
+    display: flex;
+    list-style-type: none;
+    gap: 10px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    color: black;
+}
+
+.nav-item a.active {
+    text-decoration: underline;
+}
+
+.nav-item a::after {
+    content: '';
+    transform: scaleX(0);
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: black;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+}
+
+.nav-item a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom right;
+}
