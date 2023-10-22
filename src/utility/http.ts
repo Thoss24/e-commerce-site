@@ -13,15 +13,3 @@ export const fetchProducts = async () => {
 
     return data
 };
-
-export const fetchProduct = async (id: number) => {
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-
-    if (!response.ok) {
-        throw Error('Could not load products')
-    };
-
-    const data = await response.json()
-
-    return data
-}
