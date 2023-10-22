@@ -19,7 +19,7 @@
 }
 
 .nav-item a.active {
-    text-decoration: underline;
+    font-weight: bold;
 }
 
 .nav-item a::after {
