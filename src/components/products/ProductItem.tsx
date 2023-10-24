@@ -1,23 +1,27 @@
 import classes from './ProductItem.module.css';
-import { useState } from 'react';
 import ProductDetailModal from './ProductDetailModal';
+import { useState } from 'react';
 
 const ProductItem: React.FC<{name: string, imageUrl: string, itemDescription: string, id: number}> = (props) => {
 
-    const [isDisplaying, setIsDisplaying] = useState(false);
+    const [modalDisplaying, setModalDisplaying] = useState(false)
 
-    const modal = (
-        <ProductDetailModal />
-    );
-
-    const inspectItemHandler = () => {
-        setIsDisplaying(true)
+    const hideModal = () => {
+        setModalDisplaying(false)
     };
 
+    const showModal = () => {
+        setModalDisplaying(true)
+    };
+
+    const modal = (
+        <ProductDetailModal hide={hideModal}/>
+    );
+
     return (
-        <div className={isDisplaying ? classes['product-item-container'] : ''}>
-        {isDisplaying && modal}
-        <div className={classes.shell} onClick={inspectItemHandler}>
+        <div className={modalDisplaying ? classes['product-item-container'] : ''}>
+        {modalDisplaying && modal}
+        <div className={classes.shell} onClick={showModal}>
             <h2>{props.name}</h2>
             <h2>{props.id}</h2>
             <img src={props.imageUrl} alt={props.imageUrl}></img>
