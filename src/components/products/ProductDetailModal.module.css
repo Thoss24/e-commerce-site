@@ -7,6 +7,10 @@
     left: 0;
 }
 
+.backdrop:hover {
+    cursor: pointer;
+}
+
 .modal-container {
     width: 100%;
     display: flex;

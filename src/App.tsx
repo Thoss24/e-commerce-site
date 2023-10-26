@@ -11,6 +11,7 @@ import ContactPage from "./routes/contact/ContactPage";
 import AppRoot from "./routes/app_root/AppRoot";
 import { queryClient } from "./utility/http";
 import ErrorPage from "./components/error/ErrorPage";
+import Wishlist from "./routes/wishlist/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <ContactPage />,
       },
+      {
+        path: "/wishlist",
+        element: <Wishlist />
+      }
     ],
   },
 ]);

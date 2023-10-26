@@ -25,6 +25,11 @@ const MainNavigation = () => {
           Contacts
         </NavLink>
       </li>
+      <li className={classes['nav-item']}>
+        <NavLink to={"/wishlist"} className={isActive}>
+          Wishlist
+        </NavLink>
+      </li>
     </ul>
     </div>
   );
