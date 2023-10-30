@@ -10,25 +10,27 @@
     padding: 8px;
 }
 
-.heart-icon-container {
+.icon-container {
     display: flex;
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-around;
     align-items: center;
 }
 
-.heart-icon {
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.icon {
     font-size: 25px;
     padding: 20px;
 }
 
-.heart-icon:active{
-    --fa-animation-duration: 0.5s
-}
-
 .shell:hover {
     cursor: pointer;
-    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
 .shell img{
