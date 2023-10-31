@@ -27,8 +27,16 @@ const cartSlice = createSlice({
       }
       console.log(current(state.cart))
     },
-    removeItem(state, action: PayloadAction<{ name: string; amount: number }>) {
+    removeItem(state, action: PayloadAction<{ name: string; price: number, id: number, quantity: number }>) {
+      const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
+      const existingCartItem = state.cart[existingCartItemIndex];
 
+      if (existingCartItem.quantity === 1) {
+        state.cart.filter((item) => item.id !== action.payload.id)
+      } else {
+        existingCartItem.quantity--
+      }
+      console.log(current(state.cart))
     },
   },
 });
