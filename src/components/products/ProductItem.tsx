@@ -5,10 +5,13 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { CartItem } from '../../models/CartItem';
 import { useAppSelector } from '../../hooks/hooks';
+import * as React from 'react';
 
 const ProductItem: React.FC<{name: string, imageUrl: string, itemDescription: string, id: number, showItem: () => void}> = (props) => {
 
     const dispatch = useAppDispatch();
+
+    const quantity = React.useRef<HTMLInputElement>(null);
 
     const cart = useAppSelector(state => state.cart.cart);
 
@@ -22,10 +25,20 @@ const ProductItem: React.FC<{name: string, imageUrl: string, itemDescription: st
         let cartItem: CartItem = {
             name: props.name,
             id: props.id,
-            quantity: 1,
+            quantity: Number(quantity.current?.value),
             price: 12
         };
         dispatch(cartActions.addItem(cartItem))
+    };
+
+    const removeFromCartHandler = () => {
+        let cartItem: CartItem = {
+            name: props.name,
+            id: props.id,
+            quantity: 1,
+            price: 12
+        };
+        dispatch(cartActions.removeItem(cartItem))
     };
 
     return (
@@ -33,9 +46,11 @@ const ProductItem: React.FC<{name: string, imageUrl: string, itemDescription: st
             <div className={classes['icon-container']}>
                 <div>
                 <FaShoppingCart className={classes.icon} onClick={addToCartHandler}/>
-                <p>{cartItem?.quantity}</p>
+                <label htmlFor='quantity'>Qty</label>
+                <input type="number" id='quantity' ref={quantity}/>
+                <p>{cartItem?.quantity === 0 ? '' : cartItem?.quantity}</p>
                 </div>
-                <button type='button'>-</button>
+                <button type='button' onClick={removeFromCartHandler}>-</button>
                 <FaHeart className={classes.icon} onClick={addToWishlistHandler}/>
             </div>
             <div className={classes.content} onClick={props.showItem}>

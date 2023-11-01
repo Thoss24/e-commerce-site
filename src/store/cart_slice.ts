@@ -31,7 +31,12 @@ const cartSlice = createSlice({
       const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
       const existingCartItem = state.cart[existingCartItemIndex];
 
+      if (existingCartItem.quantity === 0) {
+        return
+      }
+
       if (existingCartItem.quantity === 1) {
+        existingCartItem.quantity--
         state.cart.filter((item) => item.id !== action.payload.id)
       } else {
         existingCartItem.quantity--
