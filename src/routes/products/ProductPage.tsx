@@ -32,7 +32,7 @@ const ProductPage = () => {
         {modalDisplaying && modal}
         <div className={classes.products}>
         {data ? data.map((item: ProductItemType) => (
-            <ProductItem key={item.id} id={item.id}  name={item.title} imageUrl={item.image} itemDescription={item.description} showItem={showModal}/>
+            <ProductItem key={item.id} id={item.id} name={item.title} imageUrl={item.image} itemDescription={item.description} showItem={showModal}/>
         )) : 'Loading...'}
         </div>
         </>

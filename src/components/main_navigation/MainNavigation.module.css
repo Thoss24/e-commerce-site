@@ -18,6 +18,10 @@
     color: black;
 }
 
+.nav-item svg {
+    cursor: pointer;
+}
+
 .nav-item a.active {
     font-weight: bold;
 }

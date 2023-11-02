@@ -26,7 +26,8 @@ const ProductItem: React.FC<{name: string, imageUrl: string, itemDescription: st
             name: props.name,
             id: props.id,
             quantity: Number(quantity.current?.value),
-            price: 12
+            price: 12,
+            img: props.imageUrl
         };
         dispatch(cartActions.addItem(cartItem))
     };
@@ -36,7 +37,8 @@ const ProductItem: React.FC<{name: string, imageUrl: string, itemDescription: st
             name: props.name,
             id: props.id,
             quantity: 1,
-            price: 12
+            price: 12,
+            img: props.imageUrl
         };
         dispatch(cartActions.removeItem(cartItem))
     };

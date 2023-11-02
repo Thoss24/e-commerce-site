@@ -1,9 +1,19 @@
 import { NavLink } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 import classes from "./MainNavigation.module.css";
+import CartModal from "../cart/CartModal";
+import { useState } from "react";
 
 const MainNavigation = () => {
+
+  const [isModalDisplaying, setIsModalDisplaying] = useState(false);
+
   const isActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? classes.active : "";
+  };
+
+  const displayModalHandler = () => {
+    setIsModalDisplaying(true)
   };
 
   return (
@@ -29,6 +39,9 @@ const MainNavigation = () => {
         <NavLink to={"/wishlist"} className={isActive}>
           Wishlist
         </NavLink>
+      </li>
+      <li className={classes['nav-item']} onClick={displayModalHandler}>
+          <FaShoppingCart />
       </li>
     </ul>
     </div>
