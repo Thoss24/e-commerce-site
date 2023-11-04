@@ -4,6 +4,7 @@ import { cartActions } from "../../store/cart_slice";
 import { useAppDispatch } from "../../hooks/hooks";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { CartItem } from "../../models/CartItem";
+import { WishlistItem } from "../../models/WishlistItem";
 import { useAppSelector } from "../../hooks/hooks";
 import * as React from "react";
 
@@ -23,7 +24,14 @@ const ProductItem: React.FC<{
   const cartItem = cart.find((item) => item.id === props.id);
 
   const addToWishlistHandler = () => {
-    dispatch(wishlistActions.addWishlistItem("test"));
+    let wishlistItem: WishlistItem = {
+      name: props.name,
+      id: props.id,
+      price: 12,
+      img: props.imageUrl,
+      quantity: 0
+    };
+    dispatch(wishlistActions.addWishlistItem(wishlistItem));
   };
 
   const addToCartHandler = () => {

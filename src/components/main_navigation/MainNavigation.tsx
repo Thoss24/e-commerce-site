@@ -1,19 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import classes from "./MainNavigation.module.css";
-import CartModal from "../cart/CartModal";
-import { useState } from "react";
+import { useContext } from "react";
+import { ModalContext } from "../../store/modal_context";
 
 const MainNavigation = () => {
-
-  const [isModalDisplaying, setIsModalDisplaying] = useState(false);
 
   const isActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? classes.active : "";
   };
 
+  const cartContext = useContext(ModalContext);
+
   const displayModalHandler = () => {
-    setIsModalDisplaying(true)
+    cartContext.setCartDisplaying(true)
   };
 
   return (

@@ -4,12 +4,11 @@ import ProductItem from "../../components/products/ProductItem";
 import { ProductItem as ProductItemType } from "../../models/ProductItem";
 import classes from './ProductPage.module.css'
 import ProductDetailModal from "../../components/products/ProductDetailModal";
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { ModalContext } from "../../store/modal_context";
+import CartModal from "../../components/cart/CartModal";
 
 const ProductPage = () => {
-    
-    const [modalDisplaying, setModalDisplaying] = useState(false);
 
     const productItemCtx = useContext(ModalContext);
 
@@ -18,24 +17,33 @@ const ProductPage = () => {
         queryFn: fetchProducts,
     });
 
-    const hideModal = () => {
-        setModalDisplaying(false)
+    const hideProductModal = () => {
+        productItemCtx.setProductItemDisplaying(false)
     };
 
-    const showModal = () => {
+    const showProductModal = () => {
         productItemCtx.setProductItemDisplaying(true)
     };
 
+    const hideCartModal = () => {
+        productItemCtx.setCartDisplaying(false)
+    };
+
     const modal = (
-        <ProductDetailModal hide={hideModal}/>
+        <ProductDetailModal hide={hideProductModal}/>
+    );
+
+    const cartModal = (
+        <CartModal hideCart={hideCartModal}/>
     );
 
     return (
         <>
+        {productItemCtx.cartDisplaying && cartModal}
         {productItemCtx.productItemDisplaying && modal}
         <div className={classes.products}>
         {data ? data.map((item: ProductItemType) => (
-            <ProductItem key={item.id} id={item.id} name={item.title} imageUrl={item.image} itemDescription={item.description} showItem={showModal}/>
+            <ProductItem key={item.id} id={item.id} name={item.title} imageUrl={item.image} itemDescription={item.description} showItem={showProductModal}/>
         )) : 'Loading...'}
         </div>
         </>

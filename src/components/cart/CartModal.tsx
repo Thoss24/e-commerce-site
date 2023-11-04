@@ -1,7 +1,8 @@
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import CartItem from "./CartItem";
+import classes from "./CartItem.module.css";
 
-const CartModal = () => {
+const CartModal: React.FC<{ hideCart: () => void}> = (props) => {
 
     const dispatch = useAppDispatch();
 
@@ -17,7 +18,7 @@ const CartModal = () => {
             </ul>
             <div>
                 <p><strong>Cart total</strong></p>
-                <button>Close Cart</button>
+                <button onClick={props.hideCart}>Close Cart</button>
             </div>
         </div>
     )

@@ -1,9 +1,10 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "../models/CartItem";
+import { WishlistItem } from "../models/WishlistItem";
 
 type CartStateObj = {
-  cart: CartItem[];
+  cart: (CartItem|WishlistItem)[];
   cartAmount: number;
 };
 
@@ -16,7 +17,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: defaultCartState,
   reducers: {
-    addItem(state, action: PayloadAction<{ name: string; price: number, id: number, quantity: number, img: string }>) {
+    addItem(state, action: PayloadAction<CartItem>) {
       const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
       const existingCartItem = state.cart[existingCartItemIndex];
 
@@ -27,7 +28,7 @@ const cartSlice = createSlice({
       }
       console.log(current(state.cart))
     },
-    removeItem(state, action: PayloadAction<{ name: string; price: number, id: number, quantity: number, img: string }>) {
+    removeItem(state, action: PayloadAction<CartItem>) {
       const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
       const existingCartItem = state.cart[existingCartItemIndex];
 
@@ -43,6 +44,16 @@ const cartSlice = createSlice({
       }
       console.log(current(state.cart))
     },
+    addWishlistItemToCart (state, action: PayloadAction<WishlistItem>) {
+      const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
+      const existingCartItem = state.cart[existingCartItemIndex]; 
+
+      if (existingCartItem) {
+        alert("Item already in cart") // add side effect here?
+      } else {
+        state.cart.push(action.payload)
+      }
+    }
   },
 });
 
