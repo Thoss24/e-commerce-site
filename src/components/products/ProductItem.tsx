@@ -19,10 +19,6 @@ const ProductItem: React.FC<{
 
   const quantity = React.useRef<HTMLInputElement>(null);
 
-  const cart = useAppSelector((state) => state.cart.cart);
-
-  const cartItem = cart.find((item) => item.id === props.id);
-
   const addToWishlistHandler = () => {
     let wishlistItem: WishlistItem = {
       name: props.name,
@@ -59,15 +55,11 @@ const ProductItem: React.FC<{
   return (
     <div className={classes.shell}>
       <div className={classes["icon-container"]}>
-        <div>
+        <div className={classes['add-to-cart-container']}>
           <FaShoppingCart className={classes.icon} onClick={addToCartHandler} />
           <label htmlFor="quantity">Qty</label>
           <input type="number" id="quantity" ref={quantity} />
-          <p>{cartItem?.quantity === 0 ? "" : cartItem?.quantity}</p>
         </div>
-        <button type="button" onClick={removeFromCartHandler}>
-          -
-        </button>
         <FaHeart className={classes.icon} onClick={addToWishlistHandler} />
       </div>
       <div className={classes.content} onClick={props.showItem}>

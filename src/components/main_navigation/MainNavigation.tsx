@@ -3,6 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import classes from "./MainNavigation.module.css";
 import { useContext } from "react";
 import { ModalContext } from "../../store/modal_context";
+import CartModal from "../cart/CartModal";
 
 const MainNavigation = () => {
 
@@ -16,7 +17,17 @@ const MainNavigation = () => {
     cartContext.setCartDisplaying(true)
   };
 
+  const hideCartModal = () => {
+    cartContext.setCartDisplaying(false)
+  };
+
+  const cartModal = (
+    <CartModal hideCart={hideCartModal}/>
+  );
+
   return (
+    <>
+    {cartContext.cartDisplaying && cartModal}
     <div className={classes['main-nav-container']}>
       <h1>Placeholder</h1>
     <ul className={classes.nav}>
@@ -41,10 +52,11 @@ const MainNavigation = () => {
         </NavLink>
       </li>
       <li className={classes['nav-item']} onClick={displayModalHandler}>
-          <FaShoppingCart />
+        <FaShoppingCart />
       </li>
     </ul>
     </div>
+    </>
   );
 };
 

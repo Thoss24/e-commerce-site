@@ -24,6 +24,17 @@
     flex-direction: column;
 }
 
+.add-to-cart-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-to-cart-container input {
+    width: 30px;
+}
+
 .icon {
     font-size: 25px;
     padding: 20px;

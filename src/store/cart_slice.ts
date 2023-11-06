@@ -22,7 +22,7 @@ const cartSlice = createSlice({
       const existingCartItem = state.cart[existingCartItemIndex];
 
       if (existingCartItem) {
-        existingCartItem.quantity += action.payload.quantity
+        existingCartItem.quantity++;
       } else {
         state.cart.push(action.payload)
       }
@@ -37,12 +37,10 @@ const cartSlice = createSlice({
       }
 
       if (existingCartItem.quantity === 1) {
-        existingCartItem.quantity--
-        state.cart.filter((item) => item.id !== action.payload.id)
+        state.cart = state.cart.filter((item) => item.id !== action.payload.id)
       } else {
         existingCartItem.quantity--
       }
-      console.log(current(state.cart))
     },
     addWishlistItemToCart (state, action: PayloadAction<WishlistItem>) {
       const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
