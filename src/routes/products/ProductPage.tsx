@@ -11,21 +11,17 @@ import { FetchedProductItem } from "../../models/FetchedProductItem";
 const ProductPage = () => {
   const productItemCtx = useContext(ModalContext);
 
-  const [products, setProducts] = useState<FetchedProductItem[]>([]);
-  const [mensClothing, setMensClothing] = useState<FetchedProductItem[]>([]);
-  const [womansClothing, setWomansClothing] = useState<FetchedProductItem[]>([]);
-  const [jewelry, setJewelry] = useState<FetchedProductItem[]>([]);
-  const [electronics, setElectronics] = useState<FetchedProductItem[]>([]);
+  const [product, setProduct] = useState<FetchedProductItem[]>([]);
 
   const userSearch = useRef<HTMLInputElement>(null);
 
-  const { data } = useQuery({
+  const { data, isLoading, isFetched, isRefetching } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
 
   useEffect(() => {
-    setProducts(data);
+    setProduct(data);
   }, [data]);
 
   const searchResultsHandler = () => {
@@ -36,7 +32,7 @@ const ProductPage = () => {
         .includes(userSearch.current!.value.toLowerCase());
     });
     if (userSearch.current !== null) {
-      setProducts(results);
+      setProduct(results);
     } else {
       return;
     }
@@ -54,28 +50,28 @@ const ProductPage = () => {
     let results = data.filter((item: FetchedProductItem) => {
         return item.category === "men's clothing"
     });
-    setMensClothing(results)
+    setProduct(results)
   }
 
   const filterWomansClothingHandler = () => {
     let results = data.filter((item: FetchedProductItem) => {
         return item.category === "women's clothing"
     });
-    setWomansClothing(results)
+    setProduct(results)
   }
 
   const filterJewelryHandler = () => {
     let results = data.filter((item: FetchedProductItem) => {
         return item.category === "jewelry"
     });
-    setJewelry(results)
+    setProduct(results)
   }
 
   const filterElectronicsHandler = () => {
     let results = data.filter((item: FetchedProductItem) => {
         return item.category === "electronics"
     });
-    setElectronics(results)
+    setProduct(results)
   }
 
   const modal = <ProductDetailModal hide={hideProductModal} />;
@@ -98,9 +94,10 @@ const ProductPage = () => {
         <button onClick={filterElectronicsHandler}>Tech</button>
       </div>
       <div className={classes.products}>
-        {products.length === 0 ? <h3>No results found.</h3> : null}
-        {products
-          ? products.map((item: ProductItemType) => (
+        {isFetched && product && product.length === 0 && !isRefetching && "No results found."}
+        {isLoading && "Loading..."}
+        {product
+          && product.map((item: ProductItemType) => (
               <ProductItem
                 key={item.id}
                 id={item.id}
@@ -110,7 +107,7 @@ const ProductPage = () => {
                 showItem={showProductModal}
               />
             ))
-          : "Loading..."}
+          }
       </div>
     </>
   );
