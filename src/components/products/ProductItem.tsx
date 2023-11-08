@@ -5,14 +5,13 @@ import { useAppDispatch } from "../../hooks/hooks";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { CartItem } from "../../models/CartItem";
 import { WishlistItem } from "../../models/WishlistItem";
-import { useAppSelector } from "../../hooks/hooks";
+import { Link } from "react-router-dom";
 import * as React from "react";
 
 const ProductItem: React.FC<{
   name: string;
   imageUrl: string;
   itemDescription: string;
-  showItem: () => void;
   id: number;
 }> = (props) => {
   const dispatch = useAppDispatch();
@@ -62,10 +61,12 @@ const ProductItem: React.FC<{
         </div>
         <FaHeart className={classes.icon} onClick={addToWishlistHandler} />
       </div>
-      <div className={classes.content} onClick={props.showItem}>
+      <Link to={`/products/id`}>
+      <div className={classes.content}>
         <img src={props.imageUrl} alt={props.imageUrl}></img>
         <h2>{props.name}</h2>
       </div>
+      </Link>
     </div>
   );
 };

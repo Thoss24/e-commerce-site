@@ -8,6 +8,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import About from "./routes/about/AboutPage";
 import ProductPage from "./routes/products/ProductPage";
 import ContactPage from "./routes/contact/ContactPage";
+import ProductDetailsPage from "./routes/products/ProductDetailsPage";
 import AppRoot from "./routes/app_root/AppRoot";
 import { queryClient } from "./utility/http";
 import ErrorPage from "./components/error/ErrorPage";
@@ -26,6 +27,12 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <ProductPage />,
+        children: [
+          {
+            path: "/products/id",
+            element: <ProductDetailsPage />
+          }
+        ]
       },
       {
         path: "/contact",

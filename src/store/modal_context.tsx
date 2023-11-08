@@ -9,13 +9,10 @@ export const ModalContext = createContext(modalContextActions);
 
 const ModalContextProvider = ({ children }: Props) => {
   const [cartDisplaying, setCartDisplaying] = useState(false);
-  const [productItemDisplaying, setProductItemDisplaying] = useState(false);
 
   const modalContextState = {
     cartDisplaying: cartDisplaying,
     setCartDisplaying: setCartDisplaying,
-    productItemDisplaying: productItemDisplaying,
-    setProductItemDisplaying: setProductItemDisplaying
   }
 
   return <ModalContext.Provider value={modalContextState}>{children}</ModalContext.Provider>;

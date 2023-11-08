@@ -7,9 +7,9 @@ const AppRoot = () => {
   return (
     <div>
       <MainNavigation />
-      <nav>
+      <main>
         <Outlet />
-      </nav>
+      </main>
     </div>
   );
 };

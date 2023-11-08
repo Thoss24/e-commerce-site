@@ -3,13 +3,10 @@ import { fetchProducts } from "../../utility/http";
 import ProductItem from "../../components/products/ProductItem";
 import { ProductItem as ProductItemType } from "../../models/ProductItem";
 import classes from "./ProductPage.module.css";
-import ProductDetailModal from "../../components/products/ProductDetailModal";
-import { useContext, useState, useRef, useEffect } from "react";
-import { ModalContext } from "../../store/modal_context";
+import { useState, useRef, useEffect } from "react";
 import { FetchedProductItem } from "../../models/FetchedProductItem";
 
 const ProductPage = () => {
-  const productItemCtx = useContext(ModalContext);
 
   const [product, setProduct] = useState<FetchedProductItem[]>([]);
 
@@ -38,14 +35,6 @@ const ProductPage = () => {
     }
   };
 
-  const hideProductModal = () => {
-    productItemCtx.setProductItemDisplaying(false);
-  };
-
-  const showProductModal = () => {
-    productItemCtx.setProductItemDisplaying(true);
-  };
-
   const filterMensClothingHandler = () => {
     let results = data.filter((item: FetchedProductItem) => {
         return item.category === "men's clothing"
@@ -62,7 +51,7 @@ const ProductPage = () => {
 
   const filterJewelryHandler = () => {
     let results = data.filter((item: FetchedProductItem) => {
-        return item.category === "jewelry"
+        return item.category === "jewelery"
     });
     setProduct(results)
   }
@@ -74,11 +63,12 @@ const ProductPage = () => {
     setProduct(results)
   }
 
-  const modal = <ProductDetailModal hide={hideProductModal} />;
+  const filterAllProducts = () => {
+    setProduct(data)
+  }
 
   return (
     <>
-      {productItemCtx.productItemDisplaying && modal}
       <div>
         <label htmlFor="search">Search</label>
         <input
@@ -92,6 +82,7 @@ const ProductPage = () => {
         <button onClick={filterWomansClothingHandler}>Womans Clothing</button>
         <button onClick={filterJewelryHandler}>Jewelry</button>
         <button onClick={filterElectronicsHandler}>Tech</button>
+        <button onClick={filterAllProducts}>All products</button>
       </div>
       <div className={classes.products}>
         {isFetched && product && product.length === 0 && !isRefetching && "No results found."}
@@ -104,7 +95,6 @@ const ProductPage = () => {
                 name={item.title}
                 imageUrl={item.image}
                 itemDescription={item.description}
-                showItem={showProductModal}
               />
             ))
           }
