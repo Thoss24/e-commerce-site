@@ -14,7 +14,7 @@ export const fetchProducts = async () => {
     return data
 };
 
-export const fetchProduct = async (id: string) => {
+export const fetchProduct = async (id: ( string | undefined )) => {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`)
 
     if (!response.ok) {
@@ -25,3 +25,4 @@ export const fetchProduct = async (id: string) => {
 
     return data
 };
+

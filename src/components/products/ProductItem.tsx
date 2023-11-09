@@ -40,28 +40,17 @@ const ProductItem: React.FC<{
     dispatch(cartActions.addItem(cartItem));
   };
 
-  const removeFromCartHandler = () => {
-    let cartItem: CartItem = {
-      name: props.name,
-      id: props.id,
-      quantity: 1,
-      price: 12,
-      img: props.imageUrl,
-    };
-    dispatch(cartActions.removeItem(cartItem));
-  };
-
   return (
     <div className={classes.shell}>
       <div className={classes["icon-container"]}>
         <div className={classes['add-to-cart-container']}>
           <FaShoppingCart className={classes.icon} onClick={addToCartHandler} />
           <label htmlFor="quantity">Qty</label>
-          <input type="number" id="quantity" ref={quantity} />
+          <input type="number" id="quantity" ref={quantity} defaultValue={1}/>
         </div>
         <FaHeart className={classes.icon} onClick={addToWishlistHandler} />
       </div>
-      <Link to={`/products/id`}>
+      <Link to={`/products/${props.id}`}>
       <div className={classes.content}>
         <img src={props.imageUrl} alt={props.imageUrl}></img>
         <h2>{props.name}</h2>
