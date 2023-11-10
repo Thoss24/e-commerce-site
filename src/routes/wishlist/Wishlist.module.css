@@ -1,0 +1,17 @@
+.wishlist-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.wishlist {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wishlist h1 {
+    margin: 20px;
+}

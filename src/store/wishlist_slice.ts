@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { WishlistItem } from "../models/WishlistItem";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { current } from "@reduxjs/toolkit";
 
 type WishListStateObj = {
     wishlist: WishlistItem[];
@@ -32,7 +33,8 @@ const wishlistSlice = createSlice({
             const existingWishlistItem = state.wishlist[existingWishlistItemIndex];
 
             if (existingWishlistItem) {
-                state.wishlist.filter(item => item.id !== action.payload)
+                state.wishlist = state.wishlist.filter(item => item.id !== action.payload)
+                console.log(current(state))
             } else {
                 return
             };

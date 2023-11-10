@@ -1,0 +1,24 @@
+.wishlist-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.wishlist-item h2{
+    text-decoration: underline;
+}
+
+
+.buttons-container {
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+}
+
+.wishlist-item img {
+    height: 300px;
+    width: 300px;
+    margin: 20px;
+}

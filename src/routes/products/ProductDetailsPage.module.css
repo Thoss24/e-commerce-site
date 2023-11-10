@@ -38,7 +38,11 @@
     gap: 20px;
 }
 
-.product-details-container h1 {
+.product-details-container h1 h2 {
+    margin: 20px;
+}
+
+.product-details-container h2 {
     margin: 20px;
 }
 

@@ -5,10 +5,41 @@
     padding: 10px;
 }
 
+.header {
+    height: 100px;
+}
+
+.main-nav-container h1{
+    margin: 10px;
+}
+
 .nav {
     display: flex;
     list-style-type: none;
     gap: 10px;
+}
+
+/* dropdown nav */
+.dropdown-nav-container {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nav-dropdown {
+    display: none;
+    position: fixed;
+}
+
+.nav-dropdown .active {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.nav-item{
+    list-style-type: none;
 }
 
 .nav-item a {
@@ -42,4 +73,14 @@
 .nav-item a:hover:after {
     transform: scaleX(1);
     transform-origin: bottom right;
+}
+
+@media only screen and (max-width: 700px) {
+    .nav {
+       display: none;
+    }
+
+    .dropdown-nav-container {
+        display: flex;
+    }
 }

@@ -69,7 +69,7 @@ const ProductPage = () => {
 
   return (
     <>
-      <div>
+      <div className={classes.search}>
         <label htmlFor="search">Search</label>
         <input
           type="text"
@@ -77,12 +77,16 @@ const ProductPage = () => {
           onChange={searchResultsHandler}
           ref={userSearch}
         />
+        <div className={classes['filters-container']}>
         <h3>Filters</h3>
-        <button onClick={filterMensClothingHandler}>Mens Clothing</button>
-        <button onClick={filterWomansClothingHandler}>Womans Clothing</button>
-        <button onClick={filterJewelryHandler}>Jewelry</button>
-        <button onClick={filterElectronicsHandler}>Tech</button>
-        <button onClick={filterAllProducts}>All products</button>
+        <div className={classes['filter-options']}>
+        <button className={classes.button} onClick={filterMensClothingHandler}>Mens Clothing</button>
+        <button className={classes.button} onClick={filterWomansClothingHandler}>Womans Clothing</button>
+        <button className={classes.button} onClick={filterJewelryHandler}>Jewelry</button>
+        <button className={classes.button} onClick={filterElectronicsHandler}>Tech</button>
+        <button className={classes.button} onClick={filterAllProducts}>All products</button>
+        </div>
+        </div>
       </div>
       <div className={classes.products}>
         {isFetched && product && product.length === 0 && !isRefetching && "No results found."}

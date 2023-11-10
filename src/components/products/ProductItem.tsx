@@ -53,7 +53,7 @@ const ProductItem: React.FC<{
       <Link to={`/products/${props.id}`}>
       <div className={classes.content}>
         <img src={props.imageUrl} alt={props.imageUrl}></img>
-        <h2>{props.name}</h2>
+        <h4>{props.name}</h4>
       </div>
       </Link>
     </div>
