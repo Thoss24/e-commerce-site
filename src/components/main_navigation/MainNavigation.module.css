@@ -24,18 +24,34 @@
     display: none;
     flex-direction: column;
     justify-content: center;
+    width: 80px;
+    position: relative;
+}
+
+.icons {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-icon {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transition: transform 0.3s ease-out;
 }
 
 .nav-dropdown {
     display: none;
-    position: fixed;
+    position: absolute;
+    z-index: 1;
 }
 
-.nav-dropdown .active {
-    display: flex;
-    position: fixed;
-    flex-direction: column;
-    justify-content: flex-end;
+.dropdown-nav-container:hover .nav-dropdown {
+    display: block;
+}
+
+.dropdown-nav-container:hover .menu-icon {
+    transform: rotate(180deg);
 }
 
 .nav-item{
@@ -81,6 +97,6 @@
     }
 
     .dropdown-nav-container {
-        display: flex;
+        display: inline-block;
     }
 }

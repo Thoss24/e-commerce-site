@@ -4,11 +4,8 @@ import classes from "./MainNavigation.module.css";
 import { useContext } from "react";
 import { ModalContext } from "../../store/modal_context";
 import CartModal from "../cart/CartModal";
-import { useState } from "react";
 
 const MainNavigation = () => {
-
-  const [dropdownDisplaying, setDropdownDisplaying] = useState(false);
 
   const isActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? classes.active : "";
@@ -22,14 +19,6 @@ const MainNavigation = () => {
 
   const hideCartModal = () => {
     cartContext.setCartDisplaying(false)
-  };
-
-  const displayDropdownHandler = () => {
-    if (dropdownDisplaying) {
-      setDropdownDisplaying(false)
-    } else {
-      setDropdownDisplaying(true)
-    }
   };
 
   const cartModal = (
@@ -67,8 +56,11 @@ const MainNavigation = () => {
       </li>
     </ul>
     <div className={classes['dropdown-nav-container']}>
-      <h3 onClick={displayDropdownHandler}>Menu</h3>
-      <ul className={!dropdownDisplaying ? classes['nav-dropdown'] : classes['nav-dropdown active']}>
+      <div className={classes.icons}>
+        <span>Menu</span>
+        <span className={classes['menu-icon']} > &#9650;</span>
+      </div>
+      <ul className={classes['nav-dropdown']}>
       <li className={classes['nav-item']}>
         <NavLink to={"/"} className={isActive}>
           About
