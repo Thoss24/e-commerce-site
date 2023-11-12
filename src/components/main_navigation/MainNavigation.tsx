@@ -4,11 +4,23 @@ import classes from "./MainNavigation.module.css";
 import { useContext } from "react";
 import { ModalContext } from "../../store/modal_context";
 import CartModal from "../cart/CartModal";
+import { easeIn, motion } from "framer-motion";
+import { useState } from "react";
 
 const MainNavigation = () => {
 
   const isActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? classes.active : "";
+  };
+
+  const [iconActive, setIconActive] = useState(false);
+
+  const displayIconHandler = () => {
+    if (iconActive) {
+      setIconActive(false)
+    } else {
+      setIconActive(true)
+    }
   };
 
   const cartContext = useContext(ModalContext);
@@ -58,33 +70,33 @@ const MainNavigation = () => {
     <div className={classes['dropdown-nav-container']}>
       <div className={classes.icons}>
         <span>Menu</span>
-        <span className={classes['menu-icon']} > &#9650;</span>
+        <motion.span onClick={displayIconHandler} animate={{ rotate: iconActive ? 180 : 0 }} className={classes['menu-icon']} > &#9650;</motion.span>
       </div>
-      <ul className={classes['nav-dropdown']}>
-      <li className={classes['nav-item']}>
+      <motion.ul animate={{y: iconActive ? 2 : 0}} transition={{ duration: 0.3, bounce: 0, type: 'spring', ease: "linear"}} className={iconActive ? classes['nav-dropdown active'] : classes['nav-dropdown']}>
+      <li className={classes['nav-item-active']}>
         <NavLink to={"/"} className={isActive}>
           About
         </NavLink>
       </li>
-      <li className={classes['nav-item']}>
+      <li className={classes['nav-item-active']}>
         <NavLink to={"/products"} className={isActive}>
           Products
         </NavLink>
       </li>
-      <li className={classes['nav-item']}>
+      <li className={classes['nav-item-active']}>
         <NavLink to={"/contact"} className={isActive}>
           Contacts
         </NavLink>
       </li>
-      <li className={classes['nav-item']}>
+      <li className={classes['nav-item-active']}>
         <NavLink to={"/wishlist"} className={isActive}>
           Wishlist
         </NavLink>
       </li>
-      <li className={classes['nav-item']} onClick={displayModalHandler}>
+      <li className={classes['nav-item-active']} onClick={displayModalHandler}>
         <FaShoppingCart />
       </li>
-      </ul>
+      </motion.ul>
     </div>
     </div>
     </div>

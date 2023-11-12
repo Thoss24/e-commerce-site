@@ -1,6 +1,7 @@
 import { useAppSelector } from "../../hooks/hooks";
 import CartItem from "./CartItem";
 import classes from "./CartModal.module.css"
+import { motion } from "framer-motion";
 
 const CartModal: React.FC<{ hideCart: () => void}> = (props) => {
 
@@ -10,7 +11,7 @@ const CartModal: React.FC<{ hideCart: () => void}> = (props) => {
         <div className={classes.modal}>
         <div className={classes.background}/>
         <div className={classes['cart-container']}>
-            <div className={classes.cart}>
+            <motion.div initial={{ opacity: 0, y: -30}} animate={{ opacity: 1, y: 0}} className={classes.cart}>
             <h2>Shopping Cart</h2>
             <div className={classes['cart-content']}>
             <ul className={classes['cart-items']}>
@@ -23,7 +24,7 @@ const CartModal: React.FC<{ hideCart: () => void}> = (props) => {
                 <p><strong>Cart total</strong></p>
                 <button onClick={props.hideCart}>Close Cart</button>
             </div>
-            </div>
+            </motion.div>
         </div>
         </div>
     )

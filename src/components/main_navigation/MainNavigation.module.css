@@ -46,16 +46,24 @@
     z-index: 1;
 }
 
-.dropdown-nav-container:hover .nav-dropdown {
+.nav-dropdown .active {
     display: block;
-}
-
-.dropdown-nav-container:hover .menu-icon {
-    transform: rotate(180deg);
 }
 
 .nav-item{
     list-style-type: none;
+}
+
+.nav-item-active{
+    list-style-type: none;
+    border: 1px solid black;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.nav-item-active a{
+   text-decoration: none;
+   color: black;
 }
 
 .nav-item a {

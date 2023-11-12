@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../hooks/hooks";
 import { cartActions } from '../../store/cart_slice';
 import { WishlistItem as WishlistItemType } from '../../models/WishlistItem';
 import classes from './WishlistItem.module.css';
+import Button from '../../components/ui/Button';
 
 const WishlistItem: React.FC<WishlistItemType> = (props) => {
 
@@ -25,12 +26,12 @@ const WishlistItem: React.FC<WishlistItemType> = (props) => {
 
     return (
         <li className={classes['wishlist-item']}>
-            <h2>{props.name}</h2>
             <img src={props.img} alt={props.name}/>
+            <h4>{props.name}</h4>
             <p><strong>£ {props.price}</strong></p>
             <div className={classes['buttons-container']}>
-            <button onClick={removeWishlistItemHandler}>Remove</button>
-            <button onClick={addWishlistItemToCartHandler}>Add to cart</button>
+            <Button name={'Remove'} action={removeWishlistItemHandler}/>
+            <Button name={'Add to cart'} action={addWishlistItemToCartHandler}/>
             </div>
         </li>
     )
