@@ -5,6 +5,8 @@ import { ProductItem as ProductItemType } from "../../models/ProductItem";
 import classes from "./ProductPage.module.css";
 import { useState, useRef, useEffect } from "react";
 import { FetchedProductItem } from "../../models/FetchedProductItem";
+import { AnimatePresence } from "framer-motion";
+import Button from "../../components/ui/Button";
 
 const ProductPage = () => {
 
@@ -80,11 +82,13 @@ const ProductPage = () => {
         <div className={classes['filters-container']}>
         <h3>Filters</h3>
         <div className={classes['filter-options']}>
-        <button className={classes.button} onClick={filterMensClothingHandler}>Mens Clothing</button>
-        <button className={classes.button} onClick={filterWomansClothingHandler}>Womans Clothing</button>
-        <button className={classes.button} onClick={filterJewelryHandler}>Jewelry</button>
-        <button className={classes.button} onClick={filterElectronicsHandler}>Tech</button>
-        <button className={classes.button} onClick={filterAllProducts}>All products</button>
+        <AnimatePresence>
+        <Button name={'Mens Clothing'} action={filterMensClothingHandler} />
+        <Button name={'Womans Clothing'} action={filterWomansClothingHandler} />
+        <Button name={'Jewelry'} action={filterJewelryHandler} />
+        <Button name={'Tech'} action={filterElectronicsHandler} />
+        <Button name={'All products'} action={filterAllProducts} />
+        </AnimatePresence>
         </div>
         </div>
       </div>

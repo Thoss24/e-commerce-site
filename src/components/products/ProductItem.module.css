@@ -33,6 +33,10 @@
     margin: 20px;
 }
 
+/* .span {
+    background-color: red;
+} */
+
 .add-to-cart-container {
     display: flex;
     flex-direction: row;

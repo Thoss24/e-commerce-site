@@ -9,7 +9,7 @@ const CartModal: React.FC<{ hideCart: () => void}> = (props) => {
     
     return (
         <div className={classes.modal}>
-        <motion.div initial={{ opacity: 0}} animate={{ opacity: 1}} exit={{ opacity: 0}} className={classes.background}/>
+        <motion.div variants={{ hidden: { opacity: 0}, visible: { opacity: 1}}} initial="hidden" animate="visible" exit="hidden" className={classes.background}/>
         <div className={classes['cart-container']}>
             <motion.div initial={{ opacity: 0, y: -30}} animate={{ opacity: 1, y: 0}} exit={{ opacity: 0, y: -30}} className={classes.cart}>
             <h2>Shopping Cart</h2>
