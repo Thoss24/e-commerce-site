@@ -6,6 +6,7 @@ import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { CartItem } from "../../models/CartItem";
 import { WishlistItem } from "../../models/WishlistItem";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../hooks/hooks";
 import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import * as React from "react";
 
@@ -21,17 +22,18 @@ const ProductItem: React.FC<{
 
   const controls = useAnimationControls();
 
+  const wishlist = useAppSelector(state => state.wishlist.wishlist);
+
+  const itemInWishlistIndex = wishlist.findIndex(item => item.id === props.id);
+  const itemInWishlist = wishlist[itemInWishlistIndex];
+
   const controlsVariants = {
     buttonClicked : {
-      scale: 1.1,
-      transition: {type: 'bounce', mass: 100, stiffness: 100}
+      scale: 1.2,
+      transition: { ease: "linear", duration: 2 }
     },
     initialState : {
-      scale: 0.5,
-    },
-    exit : {
       scale: 1,
-      transition: {ease: 'ease-out'}
     }
   };
 
@@ -58,7 +60,7 @@ const ProductItem: React.FC<{
   };
 
   return (
-    <div className={classes.shell}>
+    <motion.li className={classes.shell} initial={{ opacity: 0}} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ type: "bounce" }}>
       <div className={classes["icon-container"]}>
         <div className={classes['add-to-cart-container']}>
           <FaShoppingCart className={classes.icon} onClick={addToCartHandler} />
@@ -66,8 +68,8 @@ const ProductItem: React.FC<{
           <input type="number" id="quantity" ref={quantity} defaultValue={1}/>
         </div>
         <AnimatePresence>
-        <motion.span variants={controlsVariants} initial="initialState" animate={controls} exit="exit" onClick={() => controls.start("buttonClicked")} className={classes.span}>
-        <FaHeart className={classes.icon} onClick={addToWishlistHandler} />
+        <motion.span variants={controlsVariants} initial="initialState" animate={controls} onClick={() => !itemInWishlist && controls.start("buttonClicked")} className={classes.span}>
+        <FaHeart className={classes.icon} onClick={addToWishlistHandler} color={itemInWishlist ? "black" : "white"} />
         </motion.span>
         </AnimatePresence>
       </div>
@@ -77,7 +79,7 @@ const ProductItem: React.FC<{
         <h4>{props.name}</h4>
       </div>
       </Link>
-    </div>
+    </motion.li>
   );
 };
 

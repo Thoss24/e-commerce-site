@@ -2,6 +2,7 @@ import { CartItem as CartItemType } from "../../models/CartItem";
 import classes from "./CartItem.module.css";
 import { useAppDispatch } from "../../hooks/hooks";
 import { cartActions } from "../../store/cart_slice";
+import { motion } from "framer-motion";
 
 const CartItem: React.FC<CartItemType> = (props) => {
 
@@ -26,7 +27,7 @@ const CartItem: React.FC<CartItemType> = (props) => {
     };
 
   return (
-    <li className={classes['cart-item']}>
+    <motion.li className={classes['cart-item']} variants={{hidden: {opacity: 0, y: 0}, visible: {opacity: 1, y: 0}}} transition={{type: "bounce"}}>
       <div className={classes['image-container']}>
         <img src={props.img} alt={`Image id ${props.id}`} />
       </div>
@@ -43,7 +44,7 @@ const CartItem: React.FC<CartItemType> = (props) => {
           <strong> £{itemTotal}</strong>
         </p>
       </div>
-    </li>
+    </motion.li>
   );
 };
 

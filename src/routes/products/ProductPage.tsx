@@ -5,7 +5,7 @@ import { ProductItem as ProductItemType } from "../../models/ProductItem";
 import classes from "./ProductPage.module.css";
 import { useState, useRef, useEffect } from "react";
 import { FetchedProductItem } from "../../models/FetchedProductItem";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Button from "../../components/ui/Button";
 
 const ProductPage = () => {
@@ -92,7 +92,7 @@ const ProductPage = () => {
         </div>
         </div>
       </div>
-      <div className={classes.products}>
+      <motion.ul animate={{ transition: { staggerChildren: 0.2}}} className={classes.products}>
         {isFetched && product && product.length === 0 && !isRefetching && "No results found."}
         {isLoading && "Loading..."}
         {product
@@ -106,7 +106,7 @@ const ProductPage = () => {
               />
             ))
           }
-      </div>
+      </motion.ul>
     </>
   );
 };

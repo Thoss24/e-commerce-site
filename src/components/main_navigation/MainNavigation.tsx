@@ -77,7 +77,6 @@ const MainNavigation = () => {
               animate={{ rotate: iconActive ? 180 : 0 }}
               className={classes["menu-icon"]}
             >
-              {" "}
               &#9650;
             </motion.span>
           </div>
