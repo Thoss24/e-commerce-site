@@ -18,6 +18,7 @@ const cartSlice = createSlice({
   initialState: defaultCartState,
   reducers: {
     addItem(state, action: PayloadAction<CartItem>) {
+      state.cartAmount += action.payload.quantity
       const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
       const existingCartItem = state.cart[existingCartItemIndex];
 
@@ -29,6 +30,7 @@ const cartSlice = createSlice({
       console.log(current(state.cart))
     },
     removeItem(state, action: PayloadAction<CartItem>) {
+      state.cartAmount --
       const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
       const existingCartItem = state.cart[existingCartItemIndex];
 

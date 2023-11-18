@@ -7,7 +7,7 @@ import { CartItem } from "../../models/CartItem";
 import { WishlistItem } from "../../models/WishlistItem";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import * as React from "react";
 
 const ProductItem: React.FC<{
@@ -27,14 +27,16 @@ const ProductItem: React.FC<{
   const itemInWishlistIndex = wishlist.findIndex(item => item.id === props.id);
   const itemInWishlist = wishlist[itemInWishlistIndex];
 
+  const cart = useAppSelector(state => state.cart.cart);
+
+  const itemInCartIndex = cart.findIndex(item => item.id === props.id);
+  const itemInCart = cart[itemInCartIndex];
+
   const controlsVariants = {
     buttonClicked : {
-      scale: 1.2,
-      transition: { ease: "linear", duration: 2 }
+      scale: [1, 1.1, 1],
+      transition: { type: "bounce", duration: 0.3 },
     },
-    initialState : {
-      scale: 1,
-    }
   };
 
   const addToWishlistHandler = () => {
@@ -63,15 +65,15 @@ const ProductItem: React.FC<{
     <motion.li className={classes.shell} initial={{ opacity: 0}} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ type: "bounce" }}>
       <div className={classes["icon-container"]}>
         <div className={classes['add-to-cart-container']}>
-          <FaShoppingCart className={classes.icon} onClick={addToCartHandler} />
+          <motion.span variants={controlsVariants} animate={controls} onClick={() => controls.start("buttonClicked")} className={classes.span}>
+          <FaShoppingCart className={classes.icon} onClick={addToCartHandler} color={itemInCart ? "black" : "white"}/>
+          </motion.span>
           <label htmlFor="quantity">Qty</label>
           <input type="number" id="quantity" ref={quantity} defaultValue={1}/>
         </div>
-        <AnimatePresence>
-        <motion.span variants={controlsVariants} initial="initialState" animate={controls} onClick={() => !itemInWishlist && controls.start("buttonClicked")} className={classes.span}>
+        <motion.span variants={controlsVariants} animate={controls} onClick={() => !itemInWishlist && controls.start("buttonClicked")} className={classes.span}>
         <FaHeart className={classes.icon} onClick={addToWishlistHandler} color={itemInWishlist ? "black" : "white"} />
         </motion.span>
-        </AnimatePresence>
       </div>
       <Link to={`/products/${props.id}`}>
       <div className={classes.content}>
