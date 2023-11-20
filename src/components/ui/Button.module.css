@@ -10,8 +10,3 @@
     background-color: white;
 }
 
-.button:hover {
-    cursor: pointer;
-    background-color: rgba(150, 150, 150, 0.3);
-}
-

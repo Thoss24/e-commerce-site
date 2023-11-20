@@ -1,9 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.page-container {
+    display: flex;
+    height: 80vh;
+}
+
 .products {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 50px;
+    overflow-y: scroll;
 }
 
 .filters-container {
@@ -16,10 +27,11 @@
 
 .filter-options {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin: 10px;
+    margin: 20px;
 }
 
 .button {
@@ -43,4 +55,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    /* height: 100vh; */
+    flex-wrap: wrap;
+    margin: 20px;
 }

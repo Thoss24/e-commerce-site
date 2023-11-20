@@ -5,8 +5,8 @@ import { useContext } from "react";
 import { ModalContext } from "../../store/modal_context";
 import CartModal from "../cart/CartModal";
 import NavDropdownMenu from "./NavDropdownMenu";
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
-import { useState } from "react";
+import { AnimatePresence, motion, useAnimate, stagger } from "framer-motion";
+import { useState, useEffect } from "react";
 import { useAppSelector } from "../../hooks/hooks";
 
 const MainNavigation = () => {
@@ -14,18 +14,18 @@ const MainNavigation = () => {
     return isActive ? classes.active : "";
   };
 
+  const [scope, animate] = useAnimate();
+
   const [iconActive, setIconActive] = useState(false);
 
   const cartTotal = useAppSelector(state => state.cart.cartAmount);
 
-  const controls = useAnimationControls();
-
-  const controlVariants = {
-    cartChange : {
-      scale: [1, 1.2, 1],
-      transition: { type: "bounce", duration: 0.3},
-    }
-  };
+  useEffect(() => {
+    animate('div', {
+      rotate: [-10, 10, 0],
+      opacity: [0.5, 0.8, 1]
+    }, { type: 'spring', duration: 0.8, delay: stagger(0.05)})
+  }, [cartTotal, animate])
 
   const displayIconHandler = () => {
     if (iconActive) {
@@ -78,9 +78,11 @@ const MainNavigation = () => {
             </NavLink>
           </li>
           <li className={classes["nav-item"]} onClick={displayModalHandler}>
-            <motion.span variants={controlVariants} animate={controls} onClick={() => controls.start("cartChange")}>
-            <FaShoppingCart />
-            <span><strong>{cartTotal}</strong></span>
+            <motion.span ref={scope}>
+            <div className={classes.cart}>
+            <FaShoppingCart/>
+            {cartTotal}
+            </div>
             </motion.span>
           </li>
         </ul>

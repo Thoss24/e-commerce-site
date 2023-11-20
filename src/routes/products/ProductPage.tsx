@@ -70,7 +70,7 @@ const ProductPage = () => {
   }
 
   return (
-    <>
+    <div className={classes['page-container']}>
       <div className={classes.search}>
         <label htmlFor="search">Search</label>
         <input
@@ -107,7 +107,7 @@ const ProductPage = () => {
             ))
           }
       </motion.ul>
-    </>
+    </div>
   );
 };
 

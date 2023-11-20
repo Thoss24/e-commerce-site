@@ -77,6 +77,13 @@
     transform-origin: bottom right;
 }
 
+.cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
 @media only screen and (max-width: 700px) {
     .nav {
        display: none;
