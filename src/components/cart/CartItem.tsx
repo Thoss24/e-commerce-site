@@ -3,7 +3,7 @@ import classes from "./CartItem.module.css";
 import { useAppDispatch } from "../../hooks/hooks";
 import { cartActions } from "../../store/cart_slice";
 import { motion } from "framer-motion";
-import { IncreaseCartItemAmount } from "../../store/cart_actions";
+import { IncreaseCartItemAmount, removeItemFromCart } from "../../store/cart_actions";
 
 const CartItem: React.FC<CartItemType> = (props) => {
 
@@ -35,7 +35,7 @@ const CartItem: React.FC<CartItemType> = (props) => {
         img: props.img
       };
       dispatch(cartActions.removeItem(cartItem))
-      await IncreaseCartItemAmount(cartItem, props.id)
+      await removeItemFromCart(cartItem, {id: props.id, method: props.quantity === 1 ? 'DELETE' : 'PATCH'})  
     };
 
   return (

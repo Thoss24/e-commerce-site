@@ -23,9 +23,9 @@ export const IncreaseCartItemAmount = async (item: CartItem, id: number) => {
     };
 }
 
-export const removeItemFromCart = async (item: CartItem) => {
-    const response = await fetch('https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/cart.json', {
-        method: 'DELETE',
+export const removeItemFromCart = async (item: CartItem, config: {id: number, method: string}) => {
+    const response = await fetch(`https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/cart/${config.id}.json`, {
+        method: config.method,
         body: JSON.stringify(item)
     });
 
