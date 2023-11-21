@@ -8,6 +8,7 @@ import { WishlistItem } from "../../models/WishlistItem";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
 import { motion, useAnimationControls } from "framer-motion";
+import { addItemToCart } from "../../store/cart_actions";
 import * as React from "react";
 
 const ProductItem: React.FC<{
@@ -50,7 +51,7 @@ const ProductItem: React.FC<{
     dispatch(wishlistActions.addWishlistItem(wishlistItem));
   };
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     let cartItem: CartItem = {
       name: props.name,
       id: props.id,
@@ -59,6 +60,7 @@ const ProductItem: React.FC<{
       img: props.imageUrl,
     };
     dispatch(cartActions.addItem(cartItem));
+    await addItemToCart(cartItem, props.id)
   };
 
   return (

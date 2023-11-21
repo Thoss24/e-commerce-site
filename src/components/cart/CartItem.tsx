@@ -3,6 +3,7 @@ import classes from "./CartItem.module.css";
 import { useAppDispatch } from "../../hooks/hooks";
 import { cartActions } from "../../store/cart_slice";
 import { motion } from "framer-motion";
+import { IncreaseCartItemAmount } from "../../store/cart_actions";
 
 const CartItem: React.FC<CartItemType> = (props) => {
 
@@ -18,12 +19,23 @@ const CartItem: React.FC<CartItemType> = (props) => {
       img: props.img
     };
 
-    const increaseItemQuantityHandler = () => {
+    const increaseItemQuantityHandler = async () => {
+      console.log(props.quantity)
       dispatch(cartActions.addItem(cartItem))
+      await IncreaseCartItemAmount(cartItem, props.id)
     };
 
-    const decreaseItemQuantityHandler = () => {
+    const decreaseItemQuantityHandler = async () => {
+      const reducedQuantity = props.quantity - 1;
+      const cartItem: CartItemType = {
+        name: props.name,
+        id: props.id,
+        quantity: reducedQuantity,
+        price: props.price,
+        img: props.img
+      };
       dispatch(cartActions.removeItem(cartItem))
+      await IncreaseCartItemAmount(cartItem, props.id)
     };
 
   return (
