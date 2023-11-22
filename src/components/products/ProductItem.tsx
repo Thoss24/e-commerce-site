@@ -7,7 +7,7 @@ import { CartItem } from "../../models/CartItem";
 import { WishlistItem } from "../../models/WishlistItem";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
-import { motion, useAnimationControls } from "framer-motion";
+import { motion, useAnimationControls, useAnimate } from "framer-motion";
 import { addItemToCart } from "../../store/cart_actions";
 import * as React from "react";
 
@@ -17,7 +17,10 @@ const ProductItem: React.FC<{
   itemDescription: string;
   id: number;
 }> = (props) => {
+
   const dispatch = useAppDispatch();
+
+  const [scope, animate] = useAnimate();
 
   const quantity = React.useRef<HTMLInputElement>(null);
 
@@ -49,9 +52,19 @@ const ProductItem: React.FC<{
       quantity: 0
     };
     dispatch(wishlistActions.addWishlistItem(wishlistItem));
+
+    if (!itemInWishlist) {
+      animate('div', {
+        y: [-10, 0],
+        opacity: [0.5, 10]
+      }, {
+        type: 'spring',
+        duration: 0.6
+      })
+    }
   };
 
-  const addToCartHandler = async () => {
+  const addToCartHandler = () => {
     let cartItem: CartItem = {
       name: props.name,
       id: props.id,
@@ -60,7 +73,9 @@ const ProductItem: React.FC<{
       img: props.imageUrl,
     };
     dispatch(cartActions.addItem(cartItem));
-    await addItemToCart(cartItem, props.id)
+
+    addItemToCart(cartItem, props.id)
+    
   };
 
   return (
@@ -73,8 +88,10 @@ const ProductItem: React.FC<{
           <label htmlFor="quantity">Qty</label>
           <input type="number" id="quantity" ref={quantity} defaultValue={1}/>
         </div>
-        <motion.span variants={controlsVariants} animate={controls} onClick={() => !itemInWishlist && controls.start("buttonClicked")} className={classes.span}>
-        <FaHeart className={classes.icon} onClick={addToWishlistHandler} color={itemInWishlist ? "black" : "white"} />
+        <motion.span ref={scope} className={classes.span} onClick={addToWishlistHandler}>
+          <div>
+            <FaHeart className={classes.icon} color={itemInWishlist ? "black" : "white"} />
+          </div>
         </motion.span>
       </div>
       <Link to={`/products/${props.id}`}>

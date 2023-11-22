@@ -2,9 +2,22 @@ import { useAppSelector } from "../../hooks/hooks";
 import CartItem from "./CartItem";
 import classes from "./CartModal.module.css";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCartItems } from "../../store/cart_actions";
+import { CartItem as CartItemType } from "../../models/CartItem";
 
 const CartModal: React.FC<{ hideCart: () => void }> = (props) => {
+
   const cart = useAppSelector((state) => state.cart.cart);
+
+  const { data } = useQuery({
+    queryKey: ['cart'],
+    queryFn: fetchCartItems
+  });
+
+  // for (const i in data) {
+  //   console.log(data[i])
+  // }
 
   return (
     <div className={classes.modal}>
@@ -32,7 +45,8 @@ const CartModal: React.FC<{ hideCart: () => void }> = (props) => {
               {cart.length === 0 ? (
                 <h2 className={classes.empty}>Cart Is Empty.</h2>
               ) : (
-                cart.map((item) => (
+              data && data.map((item: CartItemType) =>
+                item !== null &&
                   <CartItem
                     name={item.name}
                     img={item.img}
@@ -40,7 +54,7 @@ const CartModal: React.FC<{ hideCart: () => void }> = (props) => {
                     price={item.price}
                     id={item.id}
                   />
-                ))
+                )
               )}
             </motion.ul>
           </div>
