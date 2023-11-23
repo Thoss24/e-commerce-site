@@ -1,15 +1,17 @@
 import { CartItem } from "../models/CartItem";
 
 export const fetchCartItems = async () => {
+
     const response = await fetch('https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/cart.json');
 
     if (!response.ok) {
         throw Error("Could not load cart items!")
-    } else {
-        const cart = await response.json();
-        console.log(cart)
-        return cart
     }
+
+    const cart = await response.json();
+    
+    return cart
+ 
 };
 
 export const addItemToCart = async (item: CartItem, id: number) => {

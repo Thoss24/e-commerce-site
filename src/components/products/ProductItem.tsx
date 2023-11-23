@@ -33,9 +33,6 @@ const ProductItem: React.FC<{
 
   const cart = useAppSelector(state => state.cart.cart);
 
-  const itemInCartIndex = cart.findIndex(item => item.id === props.id);
-  const itemInCart = cart[itemInCartIndex];
-
   const controlsVariants = {
     buttonClicked : {
       scale: [1, 1.1, 1],
@@ -73,9 +70,7 @@ const ProductItem: React.FC<{
       img: props.imageUrl,
     };
     dispatch(cartActions.addItem(cartItem));
-
     addItemToCart(cartItem, props.id)
-    
   };
 
   return (
@@ -83,7 +78,7 @@ const ProductItem: React.FC<{
       <div className={classes["icon-container"]}>
         <div className={classes['add-to-cart-container']}>
           <motion.span variants={controlsVariants} animate={controls} onClick={() => controls.start("buttonClicked")} className={classes.span}>
-          <FaShoppingCart className={classes.icon} onClick={addToCartHandler} color={itemInCart ? "black" : "white"}/>
+          <FaShoppingCart className={classes.icon} onClick={addToCartHandler}/>
           </motion.span>
           <label htmlFor="quantity">Qty</label>
           <input type="number" id="quantity" ref={quantity} defaultValue={1}/>

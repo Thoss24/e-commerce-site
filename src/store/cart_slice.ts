@@ -17,6 +17,22 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: defaultCartState,
   reducers: {
+    replaceCart(state, action: PayloadAction<CartItem[]>) {
+      for (let i in action.payload) {
+        if (action.payload[i] === null) {
+          continue
+        } else {
+          const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload[i].id);
+          const existingCartItem = state.cart[existingCartItemIndex];
+          if (existingCartItem) {
+            continue
+          } else {
+            state.cart.push(action.payload[i])
+          }
+        }
+        console.log(current(state))
+      }
+    },
     addItem(state, action: PayloadAction<CartItem>) {
       const existingCartItemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
       const existingCartItem = state.cart[existingCartItemIndex];

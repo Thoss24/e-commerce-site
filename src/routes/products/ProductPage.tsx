@@ -7,10 +7,15 @@ import { useState, useRef, useEffect } from "react";
 import { FetchedProductItem } from "../../models/FetchedProductItem";
 import { AnimatePresence, motion } from "framer-motion";
 import Button from "../../components/ui/Button";
+import { fetchCartItems } from "../../store/cart_actions";
+import { useAppDispatch } from "../../hooks/hooks";
+import { cartActions } from "../../store/cart_slice";
 
 const ProductPage = () => {
 
   const [product, setProduct] = useState<FetchedProductItem[]>([]);
+
+  const dispatch = useAppDispatch()
 
   const userSearch = useRef<HTMLInputElement>(null);
 
@@ -18,6 +23,15 @@ const ProductPage = () => {
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
+
+  const { data: cartData } = useQuery({
+    queryKey: ['cart'],
+    queryFn: fetchCartItems
+  });
+
+  useEffect(() => {
+    dispatch(cartActions.replaceCart(cartData))
+  }, [cartData, dispatch]);
 
   useEffect(() => {
     setProduct(data);
