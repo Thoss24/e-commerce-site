@@ -28,6 +28,7 @@ const cartSlice = createSlice({
             continue
           } else {
             state.cart.push(action.payload[i])
+            state.cartAmount += action.payload[i].quantity;
           }
         }
         console.log(current(state))

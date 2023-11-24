@@ -11,20 +11,19 @@ const CartItem: React.FC<CartItemType> = (props) => {
 
     const dispatch = useAppDispatch();
 
-    const cartItem: CartItemType = {
-      name: props.name,
-      id: props.id,
-      quantity: props.quantity,
-      price: props.price,
-      img: props.img
-    };
-
     const increaseItemQuantityHandler = () => {
+      const cartItem: CartItemType = {
+        name: props.name,
+        id: props.id,
+        quantity: props.quantity + 1,
+        price: props.price,
+        img: props.img
+      };
       dispatch(cartActions.addItem(cartItem))
       IncreaseCartItemAmount(cartItem, props.id)
     };
 
-    const decreaseItemQuantityHandler = () => {
+    const decreaseItemQuantityHandler = async () => {
       const reducedQuantity = props.quantity - 1;
       const cartItem: CartItemType = {
         name: props.name,
@@ -33,6 +32,7 @@ const CartItem: React.FC<CartItemType> = (props) => {
         price: props.price,
         img: props.img
       };
+      console.log(props.quantity)
       dispatch(cartActions.removeItem(cartItem))
       removeItemFromCart(cartItem, {id: props.id, method: props.quantity === 1 ? 'DELETE' : 'PATCH'})  
     };

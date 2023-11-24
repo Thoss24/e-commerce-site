@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
 import { motion, useAnimationControls, useAnimate } from "framer-motion";
 import { addItemToCart } from "../../store/cart_actions";
+import { addItemToWishlist, removeItemFromWishlist } from "../../store/wishlist_actions";
 import * as React from "react";
 
 const ProductItem: React.FC<{
@@ -31,8 +32,6 @@ const ProductItem: React.FC<{
   const itemInWishlistIndex = wishlist.findIndex(item => item.id === props.id);
   const itemInWishlist = wishlist[itemInWishlistIndex];
 
-  const cart = useAppSelector(state => state.cart.cart);
-
   const controlsVariants = {
     buttonClicked : {
       scale: [1, 1.1, 1],
@@ -48,11 +47,21 @@ const ProductItem: React.FC<{
       img: props.imageUrl,
       quantity: 0
     };
-    dispatch(wishlistActions.addWishlistItem(wishlistItem));
-
-    if (!itemInWishlist) {
+    if (itemInWishlist) {
+      removeItemFromWishlist(props.id)
+      dispatch(wishlistActions.removeWishlistItem(props.id))
+      animate('div', {
+        scale: 1
+      },{
+        type: 'spring',
+        duration: 0.6
+      })
+    } else {
+      addItemToWishlist(props.id, wishlistItem);
+      dispatch(wishlistActions.addWishlistItem(wishlistItem));
       animate('div', {
         y: [-10, 0],
+        scale: 1.2,
         opacity: [0.5, 10]
       }, {
         type: 'spring',

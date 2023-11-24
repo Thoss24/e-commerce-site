@@ -15,6 +15,8 @@
 .cart {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 10%;
     z-index: 10;
@@ -23,6 +25,7 @@
     border-radius: 12px;
     max-height: 80%;
     margin: 10px;
+    padding: 10px;
 }
 
 .cart-content {
@@ -34,9 +37,11 @@
 
 .close {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
     align-items: center;
-    padding: 8px
+    padding: 8px;
+    width: 100%
 }
 
 .cart h2 {

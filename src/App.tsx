@@ -11,6 +11,11 @@ import ProductDetailsPage from "./routes/products/ProductDetailsPage";
 import AppRoot from "./routes/app_root/AppRoot";
 import ErrorPage from "./components/error/ErrorPage";
 import Wishlist from "./routes/wishlist/Wishlist";
+import { useEffect } from "react";
+import { useAppDispatch } from "./hooks/hooks";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCartItems } from "./store/cart_actions";
+import { cartActions } from "./store/cart_slice";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +48,18 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
+  const dispatch = useAppDispatch();
+
+  const { data: cartData } = useQuery({
+    queryKey: ['cart'],
+    queryFn: fetchCartItems
+  });
+
+  useEffect(() => {
+    dispatch(cartActions.replaceCart(cartData))
+  }, [cartData, dispatch]);
+
   return (
     <RouterProvider router={router}></RouterProvider>
   );

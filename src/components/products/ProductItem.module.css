@@ -49,10 +49,11 @@
 }
 
 .icon {
-    font-size: 17px;
+    font-size: 20px;
     padding: 20px;
+    margin: 10px;
     stroke: black;
-    stroke-width: 20;
+    stroke-width: 35;
 }
 
 .shell:hover {

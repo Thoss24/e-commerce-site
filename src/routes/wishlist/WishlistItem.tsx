@@ -4,24 +4,27 @@ import { cartActions } from '../../store/cart_slice';
 import { WishlistItem as WishlistItemType } from '../../models/WishlistItem';
 import classes from './WishlistItem.module.css';
 import Button from '../../components/ui/Button';
+import { removeItemFromWishlist } from '../../store/wishlist_actions';
 
 const WishlistItem: React.FC<WishlistItemType> = (props) => {
 
     const dispatch = useAppDispatch();
 
+    const wishlistItem: WishlistItemType = {
+        name: props.name,
+        id: props.id,
+        price: props.price,
+        img: props.img,
+        quantity: 1
+    }
+
     const addWishlistItemToCartHandler = () => {
-        const wishlistItem: WishlistItemType = {
-            name: props.name,
-            id: props.id,
-            price: props.price,
-            img: props.img,
-            quantity: 1
-        }
         dispatch(cartActions.addWishlistItemToCart(wishlistItem))
     };
 
     const removeWishlistItemHandler = () => {
         dispatch(wishlistActions.removeWishlistItem(props.id))
+        removeItemFromWishlist(props.id)
     };
 
     return (

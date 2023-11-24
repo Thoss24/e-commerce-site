@@ -27,6 +27,7 @@ export const addItemToCart = async (item: CartItem, id: number) => {
 };
 
 export const IncreaseCartItemAmount = async (item: CartItem, id: number) => {
+    console.log(item)
     const response = await fetch(`https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/cart/${id}.json`, {
         method: 'PATCH',
         body: JSON.stringify(item)
@@ -43,7 +44,13 @@ export const removeItemFromCart = async (item: CartItem, config: {id: number, me
         body: JSON.stringify(item)
     });
 
+    console.log(config.method)
+
     if (!response.ok) {
         throw Error("Could not add item to cart!")
     };
+
+    const data = await response.json()
+
+    return data
 };

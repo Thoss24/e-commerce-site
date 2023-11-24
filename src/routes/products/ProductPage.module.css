@@ -6,6 +6,7 @@
 .page-container {
     display: flex;
     height: 80vh;
+    width: 100vw;
 }
 
 .products {
@@ -15,6 +16,7 @@
     flex-wrap: wrap;
     gap: 50px;
     overflow-y: scroll;
+    width: 80%;
 }
 
 .filters-container {
@@ -55,7 +57,25 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* height: 100vh; */
     flex-wrap: wrap;
     margin: 20px;
+    width: 20%;
+}
+
+.filters-dropdown {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+    .search {
+        display: none;
+    }
+
+    .products {
+        width: 100%;
+    }
+
+    .filters-dropdown {
+        display: flex;
+    }
 }

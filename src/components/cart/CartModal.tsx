@@ -3,10 +3,15 @@ import classes from "./CartModal.module.css";
 import { motion } from "framer-motion";
 import { CartItem as CartItemType } from "../../models/CartItem";
 import { useAppSelector } from "../../hooks/hooks";
+import Button from "../ui/Button";
 
 const CartModal: React.FC<{ hideCart: () => void }> = (props) => {
 
   const cart = useAppSelector(state => state.cart.cart);
+
+  const cartTotal = cart.map(item => item.price * item.quantity).reduce((acc, item) => {
+    return acc += item
+  });
 
   return (
     <div className={classes.modal}>
@@ -49,9 +54,10 @@ const CartModal: React.FC<{ hideCart: () => void }> = (props) => {
           </div>
           <div className={classes.close}>
             <p>
-              <strong>Cart total</strong>
+              Cart Total: 
+              <strong> £{cartTotal}</strong>
             </p>
-            <button onClick={props.hideCart}>Close Cart</button>
+            <Button name={"Close Cart"} action={props.hideCart}></Button>
           </div>
         </motion.div>
       </div>
