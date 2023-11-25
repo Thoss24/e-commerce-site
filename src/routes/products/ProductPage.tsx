@@ -7,10 +7,13 @@ import { useState, useRef, useEffect } from "react";
 import { FetchedProductItem } from "../../models/FetchedProductItem";
 import { AnimatePresence, motion } from "framer-motion";
 import Button from "../../components/ui/Button";
+import ProductsFiltersModal from "./ProductsFiltersModal";
 
 const ProductPage = () => {
 
   const [product, setProduct] = useState<FetchedProductItem[]>([]);
+
+  const [filtersModalDisplaying, setFiltersModalDisplaying] = useState<Boolean>(false);
 
   const userSearch = useRef<HTMLInputElement>(null);
 
@@ -69,15 +72,28 @@ const ProductPage = () => {
     setProduct(data)
   }
 
-  let filtersDropdown = (
+  const toggleFiltersDropdown = () => {
+    if (filtersModalDisplaying) {
+      setFiltersModalDisplaying(false)
+    } else setFiltersModalDisplaying(true)
+    console.log(filtersModalDisplaying)
+  }
+
+  const filtersDropdownButton = (
     <div className={classes['filters-dropdown']}>
-      menu
+    <Button action={toggleFiltersDropdown} name={"Filters"}/>
     </div>
+  );
+
+  const filtersModal = (
+    <ProductsFiltersModal />
   );
 
   return (
     <div className={classes['page-container']}>
-      {filtersDropdown}
+    {filtersModalDisplaying && filtersModal}
+      {filtersDropdownButton}
+      <div className={classes['search-container']}>
       <div className={classes.search}>
         <label htmlFor="search">Search</label>
         <input
@@ -99,6 +115,8 @@ const ProductPage = () => {
         </div>
         </div>
       </div>
+      </div>
+      <div className={classes['products-container']}>
       <motion.ul animate={{ transition: { staggerChildren: 0.2}}} className={classes.products}>
         {isFetched && product && product.length === 0 && !isRefetching && "No results found."}
         {isLoading && "Loading..."}
@@ -114,6 +132,7 @@ const ProductPage = () => {
             ))
           }
       </motion.ul>
+      </div>
     </div>
   );
 };

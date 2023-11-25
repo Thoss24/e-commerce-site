@@ -16,6 +16,8 @@ import { useAppDispatch } from "./hooks/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCartItems } from "./store/cart_actions";
 import { cartActions } from "./store/cart_slice";
+import { wishlistActions } from "./store/wishlist_slice";
+import { fetchWishlistItems } from "./store/wishlist_actions";
 
 const router = createBrowserRouter([
   {
@@ -56,9 +58,18 @@ function App() {
     queryFn: fetchCartItems
   });
 
+  const { data: wishListData } = useQuery({
+    queryKey: ['wishlist'],
+    queryFn: fetchWishlistItems
+  });
+
   useEffect(() => {
     dispatch(cartActions.replaceCart(cartData))
   }, [cartData, dispatch]);
+
+  useEffect(() => {
+    dispatch(wishlistActions.replaceWishlist(wishListData))
+  }, [wishListData]);
 
   return (
     <RouterProvider router={router}></RouterProvider>

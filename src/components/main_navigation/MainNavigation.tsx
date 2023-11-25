@@ -23,7 +23,6 @@ const MainNavigation = () => {
   useEffect(() => {
     animate('div', {
       rotate: [-10, 10, 0],
-      opacity: [0.5, 0.8, 1]
     }, { type: 'spring', duration: 0.8, delay: stagger(0.05)})
   }, [cartTotal, animate])
 

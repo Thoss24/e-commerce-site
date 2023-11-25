@@ -7,7 +7,7 @@ import { CartItem } from "../../models/CartItem";
 import { WishlistItem } from "../../models/WishlistItem";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
-import { motion, useAnimationControls, useAnimate } from "framer-motion";
+import { motion, useAnimate } from "framer-motion";
 import { addItemToCart } from "../../store/cart_actions";
 import { addItemToWishlist, removeItemFromWishlist } from "../../store/wishlist_actions";
 import * as React from "react";
@@ -25,19 +25,15 @@ const ProductItem: React.FC<{
 
   const quantity = React.useRef<HTMLInputElement>(null);
 
-  const controls = useAnimationControls();
-
+  // check if item in wishlist
   const wishlist = useAppSelector(state => state.wishlist.wishlist);
-
   const itemInWishlistIndex = wishlist.findIndex(item => item.id === props.id);
   const itemInWishlist = wishlist[itemInWishlistIndex];
 
-  const controlsVariants = {
-    buttonClicked : {
-      scale: [1, 1.1, 1],
-      transition: { type: "bounce", duration: 0.3 },
-    },
-  };
+  // check if item in cart
+  const cart = useAppSelector(state => state.cart.cart);
+  const itemInCartIndex = cart.findIndex(item => item.id === props.id);
+  const itemInCart = cart[itemInCartIndex];
 
   const addToWishlistHandler = () => {
     let wishlistItem: WishlistItem = {
@@ -50,7 +46,7 @@ const ProductItem: React.FC<{
     if (itemInWishlist) {
       removeItemFromWishlist(props.id)
       dispatch(wishlistActions.removeWishlistItem(props.id))
-      animate('div', {
+      animate('.wishlist', {
         scale: 1
       },{
         type: 'spring',
@@ -59,7 +55,7 @@ const ProductItem: React.FC<{
     } else {
       addItemToWishlist(props.id, wishlistItem);
       dispatch(wishlistActions.addWishlistItem(wishlistItem));
-      animate('div', {
+      animate('.wishlist', {
         y: [-10, 0],
         scale: 1.2,
         opacity: [0.5, 10]
@@ -80,20 +76,29 @@ const ProductItem: React.FC<{
     };
     dispatch(cartActions.addItem(cartItem));
     addItemToCart(cartItem, props.id)
+    animate('.cart', {
+      scale: [1, 1.1, 1],
+      y: [-10, 0]
+    }, {
+      type: 'spring',
+      duration: 0.6
+    })
   };
 
   return (
-    <motion.li className={classes.shell} initial={{ opacity: 0}} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ type: "bounce" }}>
+    <motion.li ref={scope} className={classes.shell} initial={{ opacity: 0}} animate={{ opacity: 1}} exit={{ opacity: 0}} transition={{ type: "bounce" }}>
       <div className={classes["icon-container"]}>
         <div className={classes['add-to-cart-container']}>
-          <motion.span variants={controlsVariants} animate={controls} onClick={() => controls.start("buttonClicked")} className={classes.span}>
-          <FaShoppingCart className={classes.icon} onClick={addToCartHandler}/>
+          <motion.span onClick={addToCartHandler} className={classes.span}>
+            <div className="cart">
+          <FaShoppingCart className={classes.icon} color={itemInCart ? "black" : "white"}/>
+            </div>
           </motion.span>
           <label htmlFor="quantity">Qty</label>
           <input type="number" id="quantity" ref={quantity} defaultValue={1}/>
         </div>
-        <motion.span ref={scope} className={classes.span} onClick={addToWishlistHandler}>
-          <div>
+        <motion.span  className={classes.span} onClick={addToWishlistHandler}>
+          <div className="wishlist"> 
             <FaHeart className={classes.icon} color={itemInWishlist ? "black" : "white"} />
           </div>
         </motion.span>

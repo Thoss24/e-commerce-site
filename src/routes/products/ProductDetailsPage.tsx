@@ -25,6 +25,8 @@ const ProductDetailsPage = () => {
     queryFn: fetchProducts,
   });
 
+  console.log(products)
+
   const dispatch = useAppDispatch();
 
   const productItemQuantityRef = React.useRef<HTMLInputElement>(null);
@@ -99,7 +101,7 @@ const ProductDetailsPage = () => {
       <div className={classes['products-by-category']}>
       <h3>Browse similar products</h3>
       <div className={classes['products-container']}>
-        {products.map((item: FetchedProductItem) =>
+        {products && products.map((item: FetchedProductItem) =>
           item.category === data?.category && item.id !== data?.id ? (
             <ProductItem
               name={item.title}

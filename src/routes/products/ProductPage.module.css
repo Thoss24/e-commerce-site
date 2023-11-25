@@ -1,12 +1,18 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .page-container {
     display: flex;
-    height: 80vh;
     width: 100vw;
+}
+
+.products-container {
+    display: block;
+    width: 80%;
+    height: 100vh;
 }
 
 .products {
@@ -15,8 +21,9 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 50px;
-    overflow-y: scroll;
-    width: 80%;
+    width: 100%;
+    overflow-y:scroll;
+    height: 100%;
 }
 
 .filters-container {
@@ -58,12 +65,22 @@
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 20px;
+    width: 100%;
+    outline: 1px solid rgba(17, 17, 17, 0.7);
+    border-radius: 8px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 20%;
 }
 
 .filters-dropdown {
     display: none;
+    position: absolute;
+    padding: 15px;
 }
 
 @media only screen and (max-width: 700px) {

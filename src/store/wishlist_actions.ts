@@ -1,5 +1,17 @@
 import { WishlistItem } from "../models/WishlistItem";
 
+export const fetchWishlistItems = async () => {
+    const response = await fetch(`https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/wishlist.json`);
+
+    if (!response.ok) {
+        throw Error("Could not add item to wishlist!")
+    };
+
+    const data = await response.json()
+
+    return data
+}
+
 export const addItemToWishlist = async (id: number, item: WishlistItem) => {
     const response = await fetch(`https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/wishlist/${id}.json`, {
         method: 'PUT',

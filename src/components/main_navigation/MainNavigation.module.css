@@ -7,6 +7,7 @@
 
 .header {
     height: 100px;
+    box-shadow: 0 6px 5px -2px rgba(0, 0, 0, .15);
 }
 
 .main-nav-container h1{
@@ -15,6 +16,8 @@
 
 .nav {
     display: flex;
+    justify-content: center;
+    align-items: center;
     list-style-type: none;
     gap: 10px;
 }

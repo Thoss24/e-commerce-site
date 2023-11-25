@@ -17,6 +17,23 @@ const wishlistSlice = createSlice({
     name: "wishlist",
     initialState: defaultWishlistState,
     reducers: {
+        replaceWishlist (state, action: PayloadAction<WishlistItem[]>) {
+            for (let i in action.payload) {
+                if (action.payload[i] === null) {
+                  continue
+                } else {
+                  const existingWishlistItemIndex = state.wishlist.findIndex((item) => item.id === action.payload[i].id);
+                  const existingWishlistItem = state.wishlist[existingWishlistItemIndex];
+                  if (existingWishlistItem) {
+                    continue
+                  } else {
+                    state.wishlist.push(action.payload[i])
+                    state.wishlistTotal += action.payload[i].quantity;
+                  }
+                }
+                console.log(current(state))
+              }
+        },
         addWishlistItem (state, action: PayloadAction<WishlistItem>) {
             const existingWishlistItemIndex = state.wishlist.findIndex(item => item.id === action.payload.id);
             const existingWishlistItem = state.wishlist[existingWishlistItemIndex];
