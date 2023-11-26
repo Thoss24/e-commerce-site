@@ -5,7 +5,7 @@ import { ProductItem as ProductItemType } from "../../models/ProductItem";
 import classes from "./ProductPage.module.css";
 import { useState, useRef, useEffect } from "react";
 import { FetchedProductItem } from "../../models/FetchedProductItem";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
 import Button from "../../components/ui/Button";
 import ProductsFiltersModal from "./ProductsFiltersModal";
 
@@ -14,6 +14,12 @@ const ProductPage = () => {
 
   const [filtersModalDisplaying, setFiltersModalDisplaying] =
     useState<Boolean>(false);
+
+  const productsSection = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    container: productsSection
+  });
 
   const userSearch = useRef<HTMLInputElement>(null);
 
@@ -102,8 +108,14 @@ const ProductPage = () => {
     />
   );
 
+  console.log(scrollYProgress)
+    
   return (
     <div className={classes["page-container"]}>
+      <motion.div className={classes['progress-bar-container']} >
+        <motion.div className={classes['progress-bar']} style={{ width: `${scrollYProgress}%`}} />
+        <motion.span>{scrollYProgress}</motion.span>
+      </motion.div>
       <AnimatePresence>
         {filtersModalDisplaying && filtersModal}
       </AnimatePresence>
@@ -137,7 +149,7 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
-      <div className={classes["products-container"]}>
+      <div className={classes["products-container"]} ref={productsSection}>
         <motion.ul
           animate={{ transition: { staggerChildren: 0.2 } }}
           className={classes.products}

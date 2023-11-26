@@ -83,6 +83,17 @@
     padding: 15px;
 }
 
+.progress-bar-container {
+    position: fixed;
+    width: 100vw;
+    height: 5px
+}
+
+.progress-bar {
+    height: 5px;
+    background-color: black;
+}
+
 @media only screen and (max-width: 700px) {
     .search {
         display: none;
