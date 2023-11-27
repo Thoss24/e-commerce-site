@@ -33,9 +33,9 @@
     margin: 20px;
 }
 
-/* .span {
-    background-color: red;
-} */
+.span {
+    margin: 10px;
+}
 
 .add-to-cart-container {
     display: flex;
@@ -63,4 +63,11 @@
 .shell img{
     height: 8rem;
     width: 8rem;
+}
+
+.qty-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    margin-left: 15px;
 }

@@ -38,7 +38,7 @@ const CartItem: React.FC<CartItemType> = (props) => {
     };
 
   return (
-    <motion.li className={classes['cart-item']} variants={{hidden: {opacity: 0, y: 0}, visible: {opacity: 1, y: 0}}} transition={{type: "bounce"}}>
+    <motion.li layout className={classes['cart-item']} variants={{hidden: {opacity: 0, y: 0}, visible: {opacity: 1, y: 0}}} transition={{type: "bounce"}}>
       <div className={classes['image-container']}>
         <img src={props.img} alt={`Image id ${props.id}`} />
       </div>

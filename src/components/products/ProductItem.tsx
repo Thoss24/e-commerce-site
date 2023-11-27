@@ -46,7 +46,7 @@ const ProductItem: React.FC<{
     if (itemInWishlist) {
       removeItemFromWishlist(props.id)
       dispatch(wishlistActions.removeWishlistItem(props.id))
-      animate('.wishlist', {
+      animate('.wishlist-area', {
         scale: 1
       },{
         type: 'spring',
@@ -55,7 +55,7 @@ const ProductItem: React.FC<{
     } else {
       addItemToWishlist(props.id, wishlistItem);
       dispatch(wishlistActions.addWishlistItem(wishlistItem));
-      animate('.wishlist', {
+      animate('.wishlist-area', {
         y: [-10, 0],
         scale: 1.2,
         opacity: [0.5, 10]
@@ -76,7 +76,7 @@ const ProductItem: React.FC<{
     };
     dispatch(cartActions.addItem(cartItem));
     addItemToCart(cartItem, props.id)
-    animate('.cart', {
+    animate('.cart-area', {
       scale: [1, 1.1, 1],
       y: [-10, 0]
     }, {
@@ -90,16 +90,18 @@ const ProductItem: React.FC<{
       <div className={classes["icon-container"]}>
         <div className={classes['add-to-cart-container']}>
           <motion.span onClick={addToCartHandler} className={classes.span}>
-            <div className="cart">
-          <FaShoppingCart className={classes.icon} color={itemInCart ? "black" : "white"}/>
+            <div className="cart-area">
+          <FaShoppingCart  color={itemInCart ? "black" : "lightgrey"}/>
             </div>
           </motion.span>
+          <div className={classes['qty-container']}>
           <label htmlFor="quantity">Qty</label>
           <input type="number" id="quantity" ref={quantity} defaultValue={1}/>
+          </div>
         </div>
         <motion.span  className={classes.span} onClick={addToWishlistHandler}>
-          <div className="wishlist"> 
-            <FaHeart className={classes.icon} color={itemInWishlist ? "black" : "white"} />
+          <div className="wishlist-area"> 
+            <FaHeart color={itemInWishlist ? "black" : "lightgrey"} />
           </div>
         </motion.span>
       </div>

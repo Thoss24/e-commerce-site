@@ -112,10 +112,10 @@ const ProductPage = () => {
     
   return (
     <div className={classes["page-container"]}>
-      <motion.div className={classes['progress-bar-container']} >
+      {/* <motion.div className={classes['progress-bar-container']} >
         <motion.div className={classes['progress-bar']} style={{ width: `${scrollYProgress}%`}} />
         <motion.span>{scrollYProgress}</motion.span>
-      </motion.div>
+      </motion.div> */}
       <AnimatePresence>
         {filtersModalDisplaying && filtersModal}
       </AnimatePresence>

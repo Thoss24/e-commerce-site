@@ -55,3 +55,7 @@
 .cart ul{
     padding: 0;
 }
+
+.cart-total-container {
+    margin-left: 15px;
+}
