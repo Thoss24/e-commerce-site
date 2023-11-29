@@ -74,6 +74,7 @@ const cartSlice = createSlice({
         alert("Item already in cart") // add side effect here?
       } else {
         state.cart.push(action.payload)
+        state.cartAmount += action.payload.quantity
       }
     }
   },
