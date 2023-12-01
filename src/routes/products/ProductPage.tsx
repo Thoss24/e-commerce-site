@@ -5,7 +5,7 @@ import { ProductItem as ProductItemType } from "../../models/ProductItem";
 import classes from "./ProductPage.module.css";
 import { useState, useRef, useEffect } from "react";
 import { FetchedProductItem } from "../../models/FetchedProductItem";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import Button from "../../components/ui/Button";
 import ProductsFiltersModal from "./ProductsFiltersModal";
 
@@ -17,11 +17,15 @@ const ProductPage = () => {
 
   const productsSection = useRef<HTMLDivElement>(null);
 
-  const { scrollY } = useScroll({
+  const { scrollYProgress } = useScroll({
     container: productsSection
-  });
+  });;
 
-  //const scrollProgress = useTransform(scrollY, [0, ])
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   const userSearch = useRef<HTMLInputElement>(null);
 
@@ -113,7 +117,7 @@ const ProductPage = () => {
   return (
     <div className={classes["page-container"]}>
       <motion.div className={classes['progress-bar-container']} >
-        <motion.div className={classes['progress-bar']} style={{  }} />
+        <motion.div className={classes['progress-bar']} style={{ scaleX: scaleX }} />
       </motion.div>
       <AnimatePresence>
         {filtersModalDisplaying && filtersModal}
