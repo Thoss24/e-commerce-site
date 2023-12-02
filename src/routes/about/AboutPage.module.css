@@ -19,8 +19,14 @@ main {
 .hero-image {
     display: flex;
     width: 100%;
-    justify-content: center;
-   
+    position: relative;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .images-section {
@@ -57,6 +63,7 @@ main {
 
 .about {
     display: block;
+    
 }
 
 @media only screen and (max-width: 800px) {
