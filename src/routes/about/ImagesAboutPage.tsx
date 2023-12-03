@@ -1,19 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import classes from "./AboutPage.module.css";
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { fetchImages } from "../../utility/http";
 import { useRef } from "react";
 
 const ImageSection = () => {
 
   const firstImgRef = useRef<HTMLImageElement>(null);
-  const firstImgInView = useInView(firstImgRef, { once: true});
 
   const secondImgRef = useRef<HTMLImageElement>(null);
-  const secondImgInView = useInView(firstImgRef, { once: true });
 
   const thirdImgRef = useRef<HTMLImageElement>(null);
-  const thirdImgInView = useInView(firstImgRef, { once: true });
+
+  const heroImgRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    container: heroImgRef
+  });
+
+  const heroTextScale = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
+  const heroTextOpacity = useTransform(scrollYProgress, [0, 1], [1, 0])
 
   const { data: images } = useQuery({
     queryKey: ["images"],
@@ -22,13 +28,19 @@ const ImageSection = () => {
 
   return (
     <div className={classes["images-section"]}>
+         <div className={classes['hero-image']}>
+        <motion.h2 style={{ scale: heroTextScale, opacity: heroTextOpacity }} initial={{ y: 0 }} className={classes['hero-text']}>
+          hero text
+        </motion.h2>
+        <motion.img src={images && images.stylish_man} />
+      </div>
       <div className={classes["about-page-section"]}>
         {images && (
           <motion.img
             ref={firstImgRef}
-            initial={{ opacity: firstImgInView ? 1 : 0, scale: firstImgInView ? 1 : 0.5 }}
-            animate={{ opacity: firstImgInView ? 1 : 0, scale: firstImgInView ? 1 : 0.5}}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            initial={{ opacity: 0, scale: 0.5}}
+            whileInView={{ opacity: 1, scale: 1}}
+            transition={{ duration: 0.5, type: "bounce" }}
             className={classes.image}
             src={images && images.pink}
             alt=""
@@ -50,6 +62,8 @@ const ImageSection = () => {
         {images && (
           <motion.img
             ref={secondImgRef}
+            whileInView={{ x: [150, 0]}}
+            transition={{ duration: 0.5, ease: "backInOut"}}
             className={classes.image}
             src={images && images.clothing_model}
             alt="model"
@@ -71,6 +85,8 @@ const ImageSection = () => {
         {images && (
           <motion.img
             ref={thirdImgRef}
+            whileInView={{ x: [150, 0]}}
+            transition={{ duration: 0.5, ease: "backInOut"}}
             className={classes.image}
             src={images && images.dresses}
             alt=""

@@ -7,7 +7,6 @@
 .page-container {
     display: flex;
     width: 100vw;
-    /* position: relative; */
 }
 
 .products-container {
