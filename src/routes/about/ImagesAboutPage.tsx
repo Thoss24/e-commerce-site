@@ -62,8 +62,9 @@ const ImageSection = () => {
         {images && (
           <motion.img
             ref={secondImgRef}
-            whileInView={{ x: [150, 0]}}
-            transition={{ duration: 0.5, ease: "backInOut"}}
+            initial={{ opacity: 0, scale: 0.5}}
+            whileInView={{ opacity: 1, scale: 1}}
+            transition={{ duration: 0.5, type: "bounce" }}
             className={classes.image}
             src={images && images.clothing_model}
             alt="model"
@@ -85,8 +86,9 @@ const ImageSection = () => {
         {images && (
           <motion.img
             ref={thirdImgRef}
-            whileInView={{ x: [150, 0]}}
-            transition={{ duration: 0.5, ease: "backInOut"}}
+            initial={{ opacity: 0, scale: 0.5}}
+            whileInView={{ opacity: 1, scale: 1}}
+            transition={{ duration: 0.5, type: "bounce" }}
             className={classes.image}
             src={images && images.dresses}
             alt=""

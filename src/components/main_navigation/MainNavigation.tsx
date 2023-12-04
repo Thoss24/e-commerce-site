@@ -19,11 +19,7 @@ const MainNavigation = () => {
   const cartTotal = useAppSelector(state => state.cart.cartAmount);
 
   const displayIconHandler = () => {
-    if (iconActive) {
-      setIconActive(false);
-    } else {
-      setIconActive(true);
-    }
+    setIconActive(!iconActive)
   };
 
   const cartContext = useContext(ModalContext);
@@ -32,13 +28,13 @@ const MainNavigation = () => {
     cartContext.setCartDisplaying(true);
   };
 
-  const hideCartModal = () => {
-    cartContext.setCartDisplaying(false);
+  const CartDisplayModal = () => {
+    cartContext.setCartDisplaying(!cartContext.cartDisplaying);
   };
 
-  const cartModal = <CartModal hideCart={hideCartModal} />;
+  const cartModal = <CartModal hideCart={CartDisplayModal} />;
 
-  const dropdownMenu = <NavDropdownMenu iconActive={iconActive} displayModal={displayIconHandler}/>;
+  const dropdownMenu = <NavDropdownMenu iconActive={iconActive} displayModal={displayIconHandler} cartDisplay={CartDisplayModal}/>;
 
   return (
     <div className={classes["header"]}>
@@ -70,7 +66,7 @@ const MainNavigation = () => {
           </li>
           <li className={classes["nav-item"]} onClick={displayModalHandler}>
             <motion.span>
-            <motion.div key={cartTotal} animate={{ scale: [1, 1.2, 1]}} transition={{ duration: 0.3 }} className={classes.cart}>
+            <motion.div key={cartTotal} animate={{ scale: [1, 1.2, 1]} } transition={{ duration: 0.3 }} className={classes.cart}>
             <FaShoppingCart/>
             {cartTotal}
             </motion.div>
