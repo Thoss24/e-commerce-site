@@ -34,6 +34,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 68px;
 }
 
 .image {
@@ -67,7 +68,6 @@ main {
 
 .about {
     display: block;
-    
 }
 
 @media only screen and (max-width: 800px) {

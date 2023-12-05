@@ -8,18 +8,21 @@ import NavDropdownMenu from "./NavDropdownMenu";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useAppSelector } from "../../hooks/hooks";
+import { useDetectScroll } from "../../hooks/detect_scroll";
 
 const MainNavigation = () => {
+  const { scrollDirection } = useDetectScroll();
+
   const isActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? classes.active : "";
   };
 
   const [iconActive, setIconActive] = useState(false);
 
-  const cartTotal = useAppSelector(state => state.cart.cartAmount);
+  const cartTotal = useAppSelector((state) => state.cart.cartAmount);
 
   const displayIconHandler = () => {
-    setIconActive(!iconActive)
+    setIconActive(!iconActive);
   };
 
   const cartContext = useContext(ModalContext);
@@ -34,10 +37,23 @@ const MainNavigation = () => {
 
   const cartModal = <CartModal hideCart={CartDisplayModal} />;
 
-  const dropdownMenu = <NavDropdownMenu iconActive={iconActive} displayModal={displayIconHandler} cartDisplay={CartDisplayModal}/>;
+  const dropdownMenu = (
+    <NavDropdownMenu
+      iconActive={iconActive}
+      displayModal={displayIconHandler}
+      cartDisplay={CartDisplayModal}
+    />
+  );
 
   return (
-    <div className={classes["header"]}>
+    <motion.div
+      animate={{
+        opacity: scrollDirection === "up" ? 1 : 0,
+        y: scrollDirection === "up" ? 0 : -30,
+      }}
+      transition={{ duration: 0.6, type: "spring" }}
+      className={classes["header"]}
+    >
       <AnimatePresence>
         {cartContext.cartDisplaying && cartModal}
       </AnimatePresence>
@@ -66,10 +82,15 @@ const MainNavigation = () => {
           </li>
           <li className={classes["nav-item"]} onClick={displayModalHandler}>
             <motion.span>
-            <motion.div key={cartTotal} animate={{ scale: [1, 1.2, 1]} } transition={{ duration: 0.3 }} className={classes.cart}>
-            <FaShoppingCart/>
-            {cartTotal}
-            </motion.div>
+              <motion.div
+                key={cartTotal}
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 0.3 }}
+                className={classes.cart}
+              >
+                <FaShoppingCart />
+                {cartTotal}
+              </motion.div>
             </motion.span>
           </li>
         </ul>
@@ -85,12 +106,10 @@ const MainNavigation = () => {
               &#9650;
             </motion.span>
           </div>
-          <AnimatePresence>
-          {iconActive && dropdownMenu}
-          </AnimatePresence>
+          <AnimatePresence>{iconActive && dropdownMenu}</AnimatePresence>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
