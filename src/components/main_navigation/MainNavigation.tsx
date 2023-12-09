@@ -13,6 +13,8 @@ import { useDetectScroll } from "../../hooks/detect_scroll";
 const MainNavigation = () => {
   const { scrollDirection } = useDetectScroll();
 
+ // console.log(scrollDirection)
+
   const isActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? classes.active : "";
   };
