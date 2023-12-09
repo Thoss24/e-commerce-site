@@ -12,17 +12,17 @@ const ImageSection = () => {
 
   const thirdImgRef = useRef<HTMLImageElement>(null);
 
-  //const heroImgContainerRef = useRef<HTMLDivElement>(null);
+  const heroImgContainerRef = useRef<HTMLDivElement>(null);
 
-  const heroImgText = useRef<HTMLHeadingElement>(null);
+  //const heroImg = useRef<HTMLImageElement>(null);
 
   const { scrollYProgress } = useScroll({
-    target: heroImgText,
-    offset: ["start end", "end end"]
+    target: heroImgContainerRef,
+    offset: ["0 1", "1.33 1"]
   });
 
-  //const heroTextScale = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
-  //const heroTextOpacity = useTransform(scrollYProgress, [0, 1], [1, 0])
+  const heroTextScale = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
+  //const heroTextOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.5])
 
   const { data: images } = useQuery({
     queryKey: ["images"],
@@ -31,12 +31,12 @@ const ImageSection = () => {
 
   return (
     <div className={classes["images-section"]}>
-      <div className={classes['hero-image']}>
-        <motion.h2 ref={heroImgText} style={{ scale: scrollYProgress }} className={classes['hero-text']}>
+      <motion.div ref={heroImgContainerRef} className={classes['hero-image']}>
+        <motion.h2 style={{ scale: heroTextScale }} className={classes['hero-text']}>
           hero text
         </motion.h2>
         <motion.img src={images && images.stylish_man} />
-      </div>
+      </motion.div>
       <div className={classes["about-page-section"]}>
         {images && (
           <motion.img
