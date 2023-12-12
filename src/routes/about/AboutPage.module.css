@@ -26,6 +26,7 @@ main {
     position: absolute;
     top: 40%;
     left: 50%;
+    padding: 100px;
 }
 
 .images-section {
