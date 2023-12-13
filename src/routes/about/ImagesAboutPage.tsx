@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import classes from "./AboutPage.module.css";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { fetchImages } from "../../utility/http";
 import { useRef } from "react";
 
@@ -18,23 +18,30 @@ const ImageSection = () => {
 
   const { scrollYProgress } = useScroll({
     target: heroImgContainerRef,
-    offset: ["0 1", "1.5 1"]
+    offset: ["end end", "end start"]
   });
 
-  const heroTextScale = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
-  const heroTextOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.5])
+  // offset: [0 ] = the start of the target
+  // offset: [ 1] = the end of the container
 
-  const { data: images } = useQuery({
+  //const heroTextScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.5]);
+  const heroTextOpacity = useTransform(scrollYProgress, [0.3, 1], [1, 0])
+
+  const { data: images, isLoading } = useQuery({
     queryKey: ["images"],
     queryFn: fetchImages,
   });
 
+  console.log(scrollYProgress)
+
   return (
     <div className={classes["images-section"]}>
       <motion.div ref={heroImgContainerRef} className={classes['hero-image']}>
-        <motion.h2 ref={heroTextRef} style={{ opacity: heroTextOpacity, scale: heroTextScale }} className={classes['hero-text']}>
+        { !isLoading &&
+        <motion.h2 style={{ opacity: heroTextOpacity }} className={classes['hero-text']}>
           hero text
         </motion.h2>
+        }
         <motion.img src={images && images.stylish_man} />
       </motion.div>
       <div className={classes["about-page-section"]}>
