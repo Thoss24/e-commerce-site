@@ -23,7 +23,6 @@ main {
     z-index: 1;
     width: 100%;
     position: relative;
-    min-height: 400px;
 }
 
 .hero-text {

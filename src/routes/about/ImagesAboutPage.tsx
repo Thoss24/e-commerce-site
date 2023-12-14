@@ -18,16 +18,16 @@ const ImageSection = () => {
 
   const { scrollYProgress } = useScroll({
     target: heroImgContainerRef,
-    offset: ["end end", "end start"]
+    offset: ["0 0.05", "end start"]
   });
 
   // offset: [0 ] = the start of the target
   // offset: [ 1] = the end of the container
 
   //const heroTextScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.5]);
-  const heroTextOpacity = useTransform(scrollYProgress, [0.3, 1], [1, 0])
+  const heroTextOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
-  const { data: images, isLoading } = useQuery({
+  const { data: images } = useQuery({
     queryKey: ["images"],
     queryFn: fetchImages,
   });
@@ -37,7 +37,7 @@ const ImageSection = () => {
   return (
     <div className={classes["images-section"]}>
       <motion.div ref={heroImgContainerRef} className={classes['hero-image']}>
-        { !isLoading &&
+        { images &&
         <motion.h2 style={{ opacity: heroTextOpacity }} className={classes['hero-text']}>
           hero text
         </motion.h2>
@@ -76,7 +76,7 @@ const ImageSection = () => {
             whileInView={{ opacity: 1, scale: 1}}
             transition={{ duration: 0.5, type: "bounce" }}
             className={classes.image}
-            src={images && images.clothing_model}
+            src={ images && images.clothing_model }
             alt="model"
           />
         )}
