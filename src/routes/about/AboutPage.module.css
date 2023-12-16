@@ -26,8 +26,16 @@ main {
 }
 
 .hero-text {
+    font-family:'Times New Roman', Times, serif
+}
+
+.hero-text-container {
+    display: flex;
+    justify-content: center;
     position: absolute;
-    padding: 100px;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: rgba(218, 218, 218, 1);
 }
 
 .images-section {

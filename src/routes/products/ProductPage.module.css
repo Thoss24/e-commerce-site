@@ -7,6 +7,7 @@
 .page-container {
     display: flex;
     width: 100vw;
+    margin-top: 80px;
 }
 
 .products-container {

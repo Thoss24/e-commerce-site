@@ -38,9 +38,11 @@ const ImageSection = () => {
     <div className={classes["images-section"]}>
       <motion.div ref={heroImgContainerRef} className={classes['hero-image']}>
         { images &&
-        <motion.h2 style={{ opacity: heroTextOpacity }} className={classes['hero-text']}>
-          hero text
+        <motion.div className={classes['hero-text-container']} style={{ opacity: heroTextOpacity }}>
+        <motion.h2 className={classes['hero-text']}>
+          Fashion || Tech || Jewelry & Much More
         </motion.h2>
+        </motion.div>
         }
         <motion.img src={images && images.stylish_man} />
       </motion.div>

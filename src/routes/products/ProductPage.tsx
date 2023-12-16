@@ -39,12 +39,14 @@ const ProductPage = () => {
   }, [data]);
 
   const searchResultsHandler = () => {
-    console.log(userSearch.current!.value);
-    let results = data.filter((item: FetchedProductItem) => {
-      return item.title
-        .toLowerCase()
-        .includes(userSearch.current!.value.toLowerCase());
-    });
+    let results;
+    if (data) {
+      results = data.filter((item: FetchedProductItem) => {
+        return item.title
+          .toLowerCase()
+          .includes(userSearch.current!.value.toLowerCase());
+      });
+    } 
     if (userSearch.current !== null) {
       setProduct(results);
     } else {
