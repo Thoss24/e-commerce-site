@@ -14,9 +14,6 @@ const Wishlist = () => {
     return (
         <div className={classes.wishlist}>
             <h1>Wishlist</h1>
-            <div>
-                <Button action={emailWishlistHandler} name={"Email wishlist to a friend"}/>
-            </div>
             <ul className={classes['wishlist-items']}>
                 {wishlist.map(item => (
                     <WishlistItem name={item.name} id={item.id} price={item.price} img={item.img} quantity={item.quantity}/>
