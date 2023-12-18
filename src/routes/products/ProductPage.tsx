@@ -12,6 +12,8 @@ import ProductsFiltersModal from "./ProductsFiltersModal";
 const ProductPage = () => {
   const [product, setProduct] = useState<FetchedProductItem[]>([]);
 
+  const [currentFilter, setCurrentFilter] = useState<string>("");
+
   const [filtersModalDisplaying, setFiltersModalDisplaying] =
     useState<Boolean>(false);
 
@@ -60,6 +62,7 @@ const ProductPage = () => {
     });
     setProduct(results);
     setFiltersModalDisplaying(false);
+    setCurrentFilter("mens")
   };
 
   const filterWomansClothingHandler = () => {
@@ -68,6 +71,7 @@ const ProductPage = () => {
     });
     setProduct(results);
     setFiltersModalDisplaying(false);
+    setCurrentFilter("womans")
   };
 
   const filterJewelryHandler = () => {
@@ -76,6 +80,7 @@ const ProductPage = () => {
     });
     setProduct(results);
     setFiltersModalDisplaying(false);
+    setCurrentFilter("jewelery")
   };
 
   const filterElectronicsHandler = () => {
@@ -84,11 +89,13 @@ const ProductPage = () => {
     });
     setProduct(results);
     setFiltersModalDisplaying(false);
+    setCurrentFilter("electronics")
   };
 
   const filterAllProducts = () => {
     setProduct(data);
     setFiltersModalDisplaying(false);
+    setCurrentFilter("all")
   };
 
   const toggleFiltersDropdown = () => {
@@ -115,6 +122,8 @@ const ProductPage = () => {
       closeModal={toggleFiltersDropdown}
     />
   );
+
+  console.log(currentFilter)
     
   return (
     <div className={classes["page-container"]}>
@@ -130,6 +139,8 @@ const ProductPage = () => {
           <label htmlFor="search">Search</label>
           <input
             type="text"
+            autoComplete="false"
+            name="hidden"
             id="search"
             onChange={searchResultsHandler}
             ref={userSearch}
@@ -139,16 +150,18 @@ const ProductPage = () => {
             <div className={classes["filter-options"]}>
               <AnimatePresence>
                 <Button
+                  active={currentFilter === "mens" ? true : false}
                   name={"Mens Clothing"}
                   action={filterMensClothingHandler}
                 />
                 <Button
+                active={currentFilter === "womans" ? true : false}
                   name={"Women's Clothing"}
                   action={filterWomansClothingHandler}
                 />
-                <Button name={"Jewelry"} action={filterJewelryHandler} />
-                <Button name={"Tech"} action={filterElectronicsHandler} />
-                <Button name={"All products"} action={filterAllProducts} />
+                <Button active={currentFilter === "jewelery" ? true : false} name={"Jewelry"} action={filterJewelryHandler} />
+                <Button active={currentFilter === "electronics" ? true : false} name={"Tech"} action={filterElectronicsHandler} />
+                <Button active={currentFilter === "all" ? true : false} name={"All products"} action={filterAllProducts} />
               </AnimatePresence>
             </div>
           </div>

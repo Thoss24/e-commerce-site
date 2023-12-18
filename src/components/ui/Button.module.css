@@ -6,7 +6,17 @@
     border-radius: 8px;
     border: none;
     font-size: 16px;
-    transition: background-color 0.4s;
     background-color: white;
+}
+
+.button-active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    background-color: red;
 }
 
