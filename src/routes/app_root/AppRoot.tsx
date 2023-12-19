@@ -2,6 +2,7 @@
 import { Outlet } from "react-router-dom";
 // components
 import MainNavigation from "../../components/main_navigation/MainNavigation";
+import Footer from "../../components/footer/Footer";
 import { useDetectScroll } from "../../hooks/detect_scroll";
 
 const AppRoot = () => {
@@ -16,6 +17,7 @@ const AppRoot = () => {
       <main>
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 };

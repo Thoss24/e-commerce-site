@@ -35,7 +35,7 @@ main {
     position: absolute;
     border-radius: 8px;
     padding: 8px;
-    background-color: rgba(218, 218, 218, 1);
+    background-color: rgba(218, 218, 218, 0.5);
 }
 
 .images-section {

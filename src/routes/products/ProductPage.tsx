@@ -19,8 +19,10 @@ const ProductPage = () => {
 
   const productsSection = useRef<HTMLDivElement>(null);
 
+  const productsPage = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress } = useScroll({
-    container: productsSection
+    target: productsPage
   });;
 
   const scaleX = useSpring(scrollYProgress, {
@@ -126,7 +128,7 @@ const ProductPage = () => {
   console.log(currentFilter)
     
   return (
-    <div className={classes["page-container"]}>
+    <div ref={productsPage} className={classes["page-container"]}>
       <motion.div className={classes['progress-bar-container']} >
         <motion.div className={classes['progress-bar']} style={{ scaleX: scaleX }} />
       </motion.div>

@@ -6,15 +6,14 @@
 
 .page-container {
     display: flex;
-    width: 100vw;
+    /* width: 100vw; */
     margin-top: 80px;
 }
 
 .products-container {
     display: block;
     width: 80%;
-    height: 92vh;
-    overflow-y:scroll;
+    /* height: 92vh; */
 }
 
 .products {
@@ -36,6 +35,7 @@
 
 .filter-options {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -65,8 +65,10 @@
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
     border-radius: 8px;
+    position: fixed;
+    left: 5%;
+    top: 40%;
 }
 
 .search-container {
@@ -79,8 +81,10 @@
 
 .filters-dropdown {
     display: none;
-    position: absolute;
-    padding: 15px;
+    position: fixed;
+    padding: 5px;
+    left: 0%;
+    top: 10%;
 }
 
 .progress-bar-container {
