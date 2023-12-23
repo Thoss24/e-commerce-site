@@ -7,6 +7,7 @@ import classes from './WishlistItem.module.css';
 import Button from '../../components/ui/Button';
 import { removeItemFromWishlist } from '../../store/wishlist_actions';
 import { addItemToCart } from '../../store/cart_actions';
+import { Link } from 'react-router-dom';
 
 const WishlistItem: React.FC<WishlistItemType> = (props) => {
 
@@ -40,7 +41,9 @@ const WishlistItem: React.FC<WishlistItemType> = (props) => {
 
     return (
         <li className={classes['wishlist-item']}>
+            <Link to={`/products/${props.id}`}>
             <img src={props.img} alt={props.name}/>
+            </Link>
             <h4>{props.name}</h4>
             <p><strong>£ {props.price}</strong></p>
             <div className={classes['buttons-container']}>

@@ -60,6 +60,7 @@ const CartModal: React.FC<{ hideCart: () => void }> = (props) => {
                         (item: CartItemType) =>
                           item !== null && (
                             <CartItem
+                              key={item.id}
                               name={item.name}
                               img={item.img}
                               quantity={item.quantity}

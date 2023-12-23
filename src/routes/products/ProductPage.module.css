@@ -8,6 +8,7 @@
     display: flex;
     /* width: 100vw; */
     margin-top: 80px;
+    min-height: 100vh;
 }
 
 .products-container {
@@ -89,8 +90,10 @@
 
 .progress-bar-container {
     position: fixed;
+    top: 0;
     width: 100vw;
-    height: 5px
+    height: 5px;
+    z-index: 110;
 }
 
 .progress-bar {

@@ -6,6 +6,15 @@
 
 .footer {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 20px;
+    position: relative;
+    bottom: 0;
+}
+
+.footer img {
+    height: 25px;
+    width: 25px;
 }

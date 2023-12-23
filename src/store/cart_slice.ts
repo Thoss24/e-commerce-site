@@ -31,7 +31,6 @@ const cartSlice = createSlice({
             state.cartAmount += action.payload[i].quantity;
           }
         }
-        console.log(current(state))
       }
     },
     addItem(state, action: PayloadAction<CartItem>) {
@@ -49,7 +48,6 @@ const cartSlice = createSlice({
       } else {
         state.cart.push(action.payload)
       }
-      console.log(current(state.cart))
     },
     removeItem(state, action: PayloadAction<CartItem>) {
       state.cartAmount --

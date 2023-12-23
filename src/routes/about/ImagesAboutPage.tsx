@@ -32,8 +32,6 @@ const ImageSection = () => {
     queryFn: fetchImages,
   });
 
-  console.log(scrollYProgress)
-
   return (
     <div className={classes["images-section"]}>
       <motion.div ref={heroImgContainerRef} className={classes['hero-image']}>

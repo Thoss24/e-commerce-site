@@ -31,7 +31,6 @@ const wishlistSlice = createSlice({
                     state.wishlistTotal += action.payload[i].quantity;
                   }
                 }
-                console.log(current(state))
               }
         },
         addWishlistItem (state, action: PayloadAction<WishlistItem>) {
@@ -51,7 +50,6 @@ const wishlistSlice = createSlice({
 
             if (existingWishlistItem) {
                 state.wishlist = state.wishlist.filter(item => item.id !== action.payload)
-                console.log(current(state))
             } else {
                 return
             };
