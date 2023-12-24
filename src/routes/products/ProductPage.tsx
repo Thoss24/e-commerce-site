@@ -125,7 +125,6 @@ const ProductPage = () => {
     />
   );
 
-  console.log(currentFilter)
     
   return (
     <div ref={productsPage} className={classes["page-container"]}>
