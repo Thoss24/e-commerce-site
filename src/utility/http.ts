@@ -44,3 +44,17 @@ export const fetchImages = async () => {
     return data
 };
 
+export const fetchGalleryImages = async () => {
+    const response = await fetch("https://react-http-6cb96-default-rtdb.europe-west1.firebasedatabase.app/gallery_images.json")
+
+    if (!response.ok) {
+        throw new Response(JSON.stringify({ message: "Could not load images"}), {
+            status: 500
+        })
+    }
+
+    const data = await response.json()
+
+    return data
+};
+

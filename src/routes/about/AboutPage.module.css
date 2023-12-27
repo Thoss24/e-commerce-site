@@ -80,6 +80,15 @@ main {
     min-height: 100vh;
 }
 
+/* Gallery images */
+.gallery-image-container {
+    display: flex;
+}
+
+.gallery-image {
+    width: 100%;
+}
+
 @media only screen and (max-width: 800px) {
     .about-page-section {
         flex-direction: column;
