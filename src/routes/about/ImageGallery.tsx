@@ -44,11 +44,11 @@ const ImageGallery = () => {
 
   return (
     <div className={classes[".gallery-image-container"]}>
-      <img
+      {/* <img
         className={classes["gallery-image"]}
         src={images[currImage].url}
         alt=""
-      />
+      /> */}
       <button onClick={nextImageHandler}>Next</button>
       <button onClick={backImageHandler}>Back</button>
     </div>

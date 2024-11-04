@@ -7,7 +7,6 @@
 .page-container {
     display: flex;
     /* width: 100vw; */
-    margin-top: 80px;
     min-height: 100vh;
 }
 
@@ -24,6 +23,7 @@
     flex-wrap:wrap;
     gap: 50px;
     width: 100%;
+    margin-top: 80px;
 }
 
 .filters-container {

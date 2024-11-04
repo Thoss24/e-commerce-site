@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 const ContactPage = () => {
   return (
     <div className={classes["contacts-page"]}>
+      <div className={classes['contacts-page-content']}>
       <h1>Contact Information</h1>
       <div className={classes.socials}>
         <a rel="noopener" href="https://github.com/Thoss24" target="_blank">
@@ -29,6 +30,7 @@ const ContactPage = () => {
             <FaLinkedin size={30} />
           </motion.div>
         </a>
+      </div>
       </div>
     </div>
   );

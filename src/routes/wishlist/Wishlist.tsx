@@ -8,12 +8,14 @@ const Wishlist = () => {
 
     return (
         <div className={classes.wishlist}>
+            <div className={classes['wishlist-content-area']}>
             <h1>Wishlist</h1>
             <ul className={classes['wishlist-items']}>
                 {wishlist.map(item => (
                     <WishlistItem key={item.id} name={item.name} id={item.id} price={item.price} img={item.img} quantity={item.quantity}/>
                 ))}
             </ul>
+            </div>
         </div>
     )
 };
