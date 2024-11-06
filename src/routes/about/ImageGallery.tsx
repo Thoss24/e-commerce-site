@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchGalleryImages } from "../../utility/http";
 import { useState } from "react";
 import classes from "./AboutPage.module.css";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 const ImageGallery = () => {
   const [currImage, setCurrImage] = useState<number>(0);
@@ -42,15 +43,19 @@ const ImageGallery = () => {
       }
   };
 
+  if (images.length > 0) {
+    console.log(images[currImage])
+  }
+
   return (
-    <div className={classes[".gallery-image-container"]}>
-      {/* <img
+    <div className={classes["gallery-image-container"]}>
+      {images.length !== 0 ? <img
         className={classes["gallery-image"]}
         src={images[currImage].url}
         alt=""
-      /> */}
-      <button onClick={nextImageHandler}>Next</button>
-      <button onClick={backImageHandler}>Back</button>
+      /> : <p>Failed to load image gallery.</p>}
+      <button className={classes['next-gallery-button']} onClick={nextImageHandler}><FaArrowRight /></button>
+      <button className={classes['prev-gallery-button']} onClick={backImageHandler}><FaArrowLeft /></button>
     </div>
   );
 };

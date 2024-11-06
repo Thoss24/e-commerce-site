@@ -125,7 +125,6 @@ const ProductPage = () => {
     />
   );
 
-    
   return (
     <div ref={productsPage} className={classes["page-container"]}>
       <motion.div className={classes['progress-bar-container']} >

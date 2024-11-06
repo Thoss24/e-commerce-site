@@ -83,10 +83,25 @@ main {
 /* Gallery images */
 .gallery-image-container {
     display: flex;
+    position: relative;
+    width: 100vw;
 }
 
 .gallery-image {
+    height: 1000px;
     width: 100%;
+}
+
+.next-gallery-button {
+    position: absolute;
+    right: 20px;
+    top: 300px;
+}
+
+.prev-gallery-button {
+    position: absolute;
+    left: 20px;
+    top: 300px;
 }
 
 @media only screen and (max-width: 800px) {
