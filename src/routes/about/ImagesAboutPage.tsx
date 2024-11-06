@@ -34,89 +34,37 @@ const ImageSection = () => {
 
   return (
     <div className={classes["images-section"]}>
-      <motion.div ref={heroImgContainerRef} className={classes['hero-image']}>
-        { images &&
+    <motion.div ref={heroImgContainerRef} className={classes['hero-image']}>
+      {images && (
         <motion.div className={classes['hero-text-container']} style={{ opacity: heroTextOpacity }}>
-        <motion.h2 className={classes['hero-text']}>
-          Fashion || Tech || Jewelry & Much More
-        </motion.h2>
+          <motion.h2 className={classes['hero-text']}>
+            Fashion || Tech || Jewelry & Much More
+          </motion.h2>
         </motion.div>
-        }
-        <motion.img src={images && images.stylish_man} />
-      </motion.div>
-      <div className={classes["about-page-section"]}>
+      )}
+      <motion.img src={images?.stylish_man} alt="Stylish Man" />
+    </motion.div>
+    
+    {['pink', 'clothing_model', 'dresses'].map((imageKey, index) => (
+      <div key={index} className={classes["about-page-section"]}>
         {images && (
           <motion.img
-            ref={firstImgRef}
-            initial={{ opacity: 0, scale: 0.5}}
-            whileInView={{ opacity: 1, scale: 1}}
+            ref={index === 0 ? firstImgRef : index === 1 ? secondImgRef : thirdImgRef}
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, type: "bounce" }}
             className={classes.image}
-            src={images && images.pink}
-            alt=""
+            src={images[imageKey]}
+            alt={imageKey}
           />
         )}
         <div className={classes["about-page-copy"]}>
-          <h2>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis,
-            vel.
-          </h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione
-            soluta autem, dicta repellat illo tenetur, officia sapiente ipsum et
-            similique minus modi itaque fugit id!
-          </p>
+          <h2>Lorem ipsum dolor sit amet</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione soluta autem, dicta repellat illo tenetur!</p>
         </div>
       </div>
-      <div className={classes["about-page-section"]}>
-        {images && (
-          <motion.img
-            ref={secondImgRef}
-            initial={{ opacity: 0, scale: 0.5}}
-            whileInView={{ opacity: 1, scale: 1}}
-            transition={{ duration: 0.5, type: "bounce" }}
-            className={classes.image}
-            src={ images && images.clothing_model }
-            alt="model"
-          />
-        )}
-        <div className={classes["about-page-copy"]}>
-          <h2>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-            eaque.
-          </h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-            ipsam quia magnam culpa accusamus, reiciendis, corrupti in, dolore
-            natus id nesciunt minus ad rem autem!
-          </p>
-        </div>
-      </div>
-      <div className={classes["about-page-section"]}>
-        {images && (
-          <motion.img
-            ref={thirdImgRef}
-            initial={{ opacity: 0, scale: 0.5}}
-            whileInView={{ opacity: 1, scale: 1}}
-            transition={{ duration: 0.5, type: "bounce" }}
-            className={classes.image}
-            src={images && images.dresses}
-            alt=""
-          />
-        )}
-        <div className={classes["about-page-copy"]}>
-          <h2>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae,
-            inventore.
-          </h2>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum,
-            optio repellendus quam, quod eius nulla tempora nihil accusamus
-            eligendi reiciendis nam placeat suscipit, et sequi.
-          </p>
-        </div>
-      </div>
-    </div>
+    ))}
+  </div>
   );
 };
 

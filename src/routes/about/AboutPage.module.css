@@ -4,16 +4,9 @@
     box-sizing: border-box;
 }
 
-.hero {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 20px;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Light background for contrast */
 }
 
 .hero-image {
@@ -23,10 +16,7 @@ main {
     z-index: 1;
     width: 100%;
     position: relative;
-}
-
-.hero-text {
-    font-family:'Times New Roman', Times, serif
+    margin: 20px 0;
 }
 
 .hero-text-container {
@@ -34,37 +24,49 @@ main {
     justify-content: center;
     position: absolute;
     border-radius: 8px;
-    padding: 8px;
-    background-color: rgba(218, 218, 218, 0.5);
+    padding: 16px 24px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero-text {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #333;
 }
 
 .images-section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-top: 68px;
+    /* margin-top: 40px; */
 }
 
 .image {
     margin: 20px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.hero-image img{
+.hero-image img {
     width: 100%;
+    border-radius: 8px; /* Rounded corners for images */
 }
 
-.about-page-section{
+.about-page-section {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-direction: row;
     width: 100%;
     margin: 20px;
+    align-items: center; /* Align items vertically */
 }
 
 .about-page-section img {
     max-width: 600px;
     max-height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .about-page-copy {
@@ -75,37 +77,100 @@ main {
     margin: 10px;
 }
 
-.about {
-    display: block;
-    min-height: 100vh;
+.about-page-copy h2 {
+    font-size: 1.25rem;
+    color: #333;
 }
 
-/* Gallery images */
-.gallery-image-container {
-    display: flex;
-    position: relative;
-    width: 100vw;
-}
-
-.gallery-image {
-    height: 1000px;
-    width: 100%;
-}
-
-.next-gallery-button {
-    position: absolute;
-    right: 20px;
-    top: 300px;
-}
-
-.prev-gallery-button {
-    position: absolute;
-    left: 20px;
-    top: 300px;
+.about-page-copy p {
+    color: #555;
+    line-height: 1.5;
 }
 
 @media only screen and (max-width: 800px) {
     .about-page-section {
         flex-direction: column;
+        align-items: center; /* Center align on smaller screens */
+    }
+}
+
+/* Gallery images */
+.gallery-image-container {
+    display: flex;
+    justify-content: center; /* Center the image */
+    align-items: center; /* Center vertically */
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* Limit max width for larger screens */
+    margin: 0 auto; /* Center the container */
+    overflow: hidden; /* Hide overflow */
+}
+
+.gallery-image {
+    height: auto; /* Maintain aspect ratio */
+    width: 100%; /* Full width for responsiveness */
+    max-height: 700px; /* Limit max height */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.next-gallery-button,
+.prev-gallery-button {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust positioning */
+    background: rgba(255, 255, 255, 0.7); /* Light background for buttons */
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.next-gallery-button:hover,
+.prev-gallery-button:hover {
+    background: rgba(255, 255, 255, 1); /* Solid background on hover */
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+.next-gallery-button {
+    right: 20px; /* Position right */
+}
+
+.prev-gallery-button {
+    left: 20px; /* Position left */
+}
+
+.prev-gallery-button > *,
+.next-gallery-button > * {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.6); /* Slightly darker color */
+}
+
+.prev-gallery-button > *:hover,
+.next-gallery-button > *:hover {
+    color: rgba(0, 0, 0, 1); /* Fully dark on hover */
+}
+
+.error-message {
+    color: red; /* Error message styling */
+    font-size: 1.2rem; /* Slightly larger font */
+    text-align: center; /* Center the text */
+    margin: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .gallery-image {
+        max-height: 400px; /* Adjust max height for smaller screens */
+    }
+
+    .next-gallery-button,
+    .prev-gallery-button {
+        padding: 8px; /* Smaller padding for buttons */
+    }
+
+    .prev-gallery-button > *,
+    .next-gallery-button > * {
+        font-size: 20px; /* Smaller font size for buttons */
     }
 }

@@ -135,25 +135,27 @@ const ProductDetailsPage = () => {
   }
 
   return (
-    <div className={classes["product-details-page-container"]}>
-      {productDetails}
-      <div className={classes["products-by-category"]}>
-        <h2>Browse similar products</h2>
-        <div className={classes["products-container"]}>
-          {products &&
-            products.map((item: FetchedProductItem) =>
-              item.category === data?.category && item.id !== data?.id ? (
-                <ProductItem
-                  name={item.title}
-                  imageUrl={item.image}
-                  itemDescription={item.description}
-                  id={item.id}
-                />
-              ) : null
-            )}
-        </div>
-      </div>
+<div className={classes["product-details-page-container"]}>
+  {productDetails}
+  
+  <div className={classes["products-by-category"]}>
+    <h2>Browse Similar Products</h2>
+    <div className={classes["products-container"]}>
+      {products &&
+        products.map((item: FetchedProductItem) =>
+          item.category === data?.category && item.id !== data?.id ? (
+            <ProductItem
+              key={item.id} // Add a key for each mapped item
+              name={item.title}
+              imageUrl={item.image}
+              itemDescription={item.description}
+              id={item.id}
+            />
+          ) : null
+        )}
     </div>
+  </div>
+</div>
   );
 };
 

@@ -135,38 +135,40 @@ const ProductPage = () => {
       </AnimatePresence>
       {filtersDropdownButton}
       <div className={classes["search-container"]}>
-        <div className={classes.search}>
-          <label htmlFor="search">Search</label>
-          <input
-            type="text"
-            autoComplete="false"
-            name="hidden"
-            id="search"
-            onChange={searchResultsHandler}
-            ref={userSearch}
-          />
-          <div className={classes["filters-container"]}>
-            <h3>Filters</h3>
-            <div className={classes["filter-options"]}>
-              <AnimatePresence>
-                <Button
-                  active={currentFilter === "mens" ? true : false}
-                  name={"Mens Clothing"}
-                  action={filterMensClothingHandler}
-                />
-                <Button
-                active={currentFilter === "womans" ? true : false}
-                  name={"Women's Clothing"}
-                  action={filterWomansClothingHandler}
-                />
-                <Button active={currentFilter === "jewelery" ? true : false} name={"Jewelry"} action={filterJewelryHandler} />
-                <Button active={currentFilter === "electronics" ? true : false} name={"Tech"} action={filterElectronicsHandler} />
-                <Button active={currentFilter === "all" ? true : false} name={"All products"} action={filterAllProducts} />
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
+  <div className={classes.search}>
+    <label htmlFor="search" className={classes.label}>Search</label>
+    <input
+      type="text"
+      autoComplete="off"
+      name="search"
+      id="search"
+      onChange={searchResultsHandler}
+      ref={userSearch}
+      className={classes.input}
+      placeholder="Type to search..."
+    />
+    
+    <div className={classes["filters-container"]}>
+      <h3 className={classes["filters-title"]}>Filters</h3>
+      <div className={classes["filter-options"]}>
+        <AnimatePresence>
+          {['mens', 'womans', 'jewelery', 'electronics', 'all'].map((filter) => (
+            <Button
+              key={filter}
+              active={currentFilter === filter}
+              name={filter === 'womans' ? "Women's Clothing" : `${filter.charAt(0).toUpperCase() + filter.slice(1)} Clothing`}
+              action={filter === 'mens' ? filterMensClothingHandler : 
+                      filter === 'womans' ? filterWomansClothingHandler : 
+                      filter === 'jewelery' ? filterJewelryHandler : 
+                      filter === 'electronics' ? filterElectronicsHandler : 
+                      filterAllProducts}
+            />
+          ))}
+        </AnimatePresence>
       </div>
+    </div>
+  </div>
+</div>
       <div className={classes["products-container"]} ref={productsSection}>
         <motion.ul
           animate={{ transition: { staggerChildren: 0.2 } }}

@@ -48,15 +48,25 @@ const ImageGallery = () => {
   }
 
   return (
-    <div className={classes["gallery-image-container"]}>
-      {images.length !== 0 ? <img
-        className={classes["gallery-image"]}
-        src={images[currImage].url}
-        alt=""
-      /> : <p>Failed to load image gallery.</p>}
-      <button className={classes['next-gallery-button']} onClick={nextImageHandler}><FaArrowRight /></button>
-      <button className={classes['prev-gallery-button']} onClick={backImageHandler}><FaArrowLeft /></button>
-    </div>
+<div className={classes["gallery-image-container"]}>
+  {images.length !== 0 ? (
+    <img
+      className={classes["gallery-image"]}
+      src={images[currImage].url}
+      alt="Gallery"
+    />
+  ) : (
+    <p className={classes["error-message"]}>Failed to load image gallery.</p>
+  )}
+  
+  <button className={classes['prev-gallery-button']} onClick={backImageHandler}>
+    <FaArrowLeft />
+  </button>
+  
+  <button className={classes['next-gallery-button']} onClick={nextImageHandler}>
+    <FaArrowRight />
+  </button>
+</div>
   );
 };
 
