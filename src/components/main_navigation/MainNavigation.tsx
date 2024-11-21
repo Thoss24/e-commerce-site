@@ -49,12 +49,12 @@ const MainNavigation = () => {
 
   return (
     <motion.div
-    initial={{ opacity: 1, y: 0}}
-      animate={{
-        opacity: scrollDirection === "up" ? 1 : 0,
-        y: scrollDirection === "up" ? 0 : -30,
-      }}
-      transition={{ duration: 0.6, type: "spring" }}
+    // initial={{ opacity: 1, y: 0}}
+    //   animate={{
+    //     opacity: scrollDirection === "up" ? 1 : 0,
+    //     y: scrollDirection === "up" ? 0 : -30,
+    //   }}
+    //   transition={{ duration: 0.6, type: "spring" }}
       className={classes["header"]}
     >
       <AnimatePresence>

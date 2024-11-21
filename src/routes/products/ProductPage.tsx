@@ -17,18 +17,22 @@ const ProductPage = () => {
   const [filtersModalDisplaying, setFiltersModalDisplaying] =
     useState<Boolean>(false);
 
+  useEffect(() => {
+    console.log(filtersModalDisplaying);
+  }, []);
+
   const productsSection = useRef<HTMLDivElement>(null);
 
   const productsPage = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
-    target: productsPage
-  });;
+    target: productsPage,
+  });
 
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   const userSearch = useRef<HTMLInputElement>(null);
@@ -50,7 +54,7 @@ const ProductPage = () => {
           .toLowerCase()
           .includes(userSearch.current!.value.toLowerCase());
       });
-    } 
+    }
     if (userSearch.current !== null) {
       setProduct(results);
     } else {
@@ -64,7 +68,7 @@ const ProductPage = () => {
     });
     setProduct(results);
     setFiltersModalDisplaying(false);
-    setCurrentFilter("mens")
+    setCurrentFilter("mens");
   };
 
   const filterWomansClothingHandler = () => {
@@ -73,7 +77,7 @@ const ProductPage = () => {
     });
     setProduct(results);
     setFiltersModalDisplaying(false);
-    setCurrentFilter("womans")
+    setCurrentFilter("womans");
   };
 
   const filterJewelryHandler = () => {
@@ -82,7 +86,7 @@ const ProductPage = () => {
     });
     setProduct(results);
     setFiltersModalDisplaying(false);
-    setCurrentFilter("jewelery")
+    setCurrentFilter("jewelery");
   };
 
   const filterElectronicsHandler = () => {
@@ -91,13 +95,13 @@ const ProductPage = () => {
     });
     setProduct(results);
     setFiltersModalDisplaying(false);
-    setCurrentFilter("electronics")
+    setCurrentFilter("electronics");
   };
 
   const filterAllProducts = () => {
     setProduct(data);
     setFiltersModalDisplaying(false);
-    setCurrentFilter("all")
+    setCurrentFilter("all");
   };
 
   const toggleFiltersDropdown = () => {
@@ -127,48 +131,67 @@ const ProductPage = () => {
 
   return (
     <div ref={productsPage} className={classes["page-container"]}>
-      <motion.div className={classes['progress-bar-container']} >
-        <motion.div className={classes['progress-bar']} style={{ scaleX: scaleX }} />
+      <motion.div className={classes["progress-bar-container"]}>
+        <motion.div
+          className={classes["progress-bar"]}
+          style={{ scaleX: scaleX }}
+        />
       </motion.div>
       <AnimatePresence>
         {filtersModalDisplaying && filtersModal}
       </AnimatePresence>
       {filtersDropdownButton}
       <div className={classes["search-container"]}>
-  <div className={classes.search}>
-    <label htmlFor="search" className={classes.label}>Search</label>
-    <input
-      type="text"
-      autoComplete="off"
-      name="search"
-      id="search"
-      onChange={searchResultsHandler}
-      ref={userSearch}
-      className={classes.input}
-      placeholder="Type to search..."
-    />
-    
-    <div className={classes["filters-container"]}>
-      <h3 className={classes["filters-title"]}>Filters</h3>
-      <div className={classes["filter-options"]}>
-        <AnimatePresence>
-          {['mens', 'womans', 'jewelery', 'electronics', 'all'].map((filter) => (
-            <Button
-              key={filter}
-              active={currentFilter === filter}
-              name={filter === 'womans' ? "Women's Clothing" : `${filter.charAt(0).toUpperCase() + filter.slice(1)} Clothing`}
-              action={filter === 'mens' ? filterMensClothingHandler : 
-                      filter === 'womans' ? filterWomansClothingHandler : 
-                      filter === 'jewelery' ? filterJewelryHandler : 
-                      filter === 'electronics' ? filterElectronicsHandler : 
-                      filterAllProducts}
-            />
-          ))}
-        </AnimatePresence>
+        <div className={classes.search}>
+          <label htmlFor="search" className={classes.label}>
+            Search
+          </label>
+          <input
+            type="text"
+            autoComplete="off"
+            name="search"
+            id="search"
+            onChange={searchResultsHandler}
+            ref={userSearch}
+            className={classes.input}
+            placeholder="Type to search..."
+          />
+
+          <div className={classes["filters-container"]}>
+            <h3 className={classes["filters-title"]}>Filters</h3>
+            <div className={classes["filter-options"]}>
+              <AnimatePresence>
+                {["mens", "womans", "jewelery", "electronics", "all"].map(
+                  (filter) => (
+                    <Button
+                      key={filter}
+                      active={currentFilter === filter}
+                      name={
+                        filter === "womans"
+                          ? "Women's Clothing"
+                          : `${
+                              filter.charAt(0).toUpperCase() + filter.slice(1)
+                            } Clothing`
+                      }
+                      action={
+                        filter === "mens"
+                          ? filterMensClothingHandler
+                          : filter === "womans"
+                          ? filterWomansClothingHandler
+                          : filter === "jewelery"
+                          ? filterJewelryHandler
+                          : filter === "electronics"
+                          ? filterElectronicsHandler
+                          : filterAllProducts
+                      }
+                    />
+                  )
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
       <div className={classes["products-container"]} ref={productsSection}>
         <motion.ul
           animate={{ transition: { staggerChildren: 0.2 } }}

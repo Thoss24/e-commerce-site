@@ -24,13 +24,24 @@
     margin-top: 80px;
 }
 
+.filters-dropdown {
+    margin-top: 100px;
+    display: none;
+    
+}
+
+.filters-dropdown > button {
+    height: 40px;
+    position: fixed;
+}
+
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25%; /* Adjust width for modern look */
+    width: 25%; 
     margin: 10px;
-    position: relative; /* For absolute positioning of the filters */
+    position: relative; 
 }
 
 .search {
@@ -40,8 +51,11 @@
     align-items: stretch;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-    background-color: white; /* Background for search area */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    background-color: white; 
+    position: fixed;
+    top: 150px;
+    margin-left: 10px;
 }
 
 .label {
@@ -52,15 +66,15 @@
 
 .input {
     padding: 10px;
-    border: 1px solid #ccc; /* Light border for input */
+    border: 1px solid #ccc; 
     border-radius: 8px;
-    margin-bottom: 15px; /* Spacing below input */
+    margin-bottom: 15px;
     font-size: 1rem;
 }
 
 .input:focus {
-    border-color: #007bff; /* Highlight border on focus */
-    outline: none; /* Remove default outline */
+    border-color: #007bff;
+    outline: none;
 }
 
 .filters-container {
@@ -70,8 +84,12 @@
 }
 
 .filters-title {
-    margin-bottom: 10px; /* Space between title and options */
+    margin-bottom: 10px;
     color: #333;
+    margin-top: 150px;
+    background-color: #f8f9fa;
+    padding: 4px;
+    height: 40px;
 }
 
 .filter-options {
@@ -88,19 +106,19 @@
     border: none;
     padding: 10px 15px;
     font-size: 1rem;
-    background-color: #f8f9fa; /* Light background for buttons */
-    transition: background 0.3s, transform 0.2s; /* Transition effects */
+    background-color: #f8f9fa; 
+    transition: background 0.3s, transform 0.2s; 
 }
 
 .button:hover {
     cursor: pointer;
-    background-color: rgba(41, 40, 40, 0.1); /* Slightly darker on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: rgba(41, 40, 40, 0.1); 
+    transform: scale(1.05);
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 850px) {
     .search {
-        display: none; /* Hide search on smaller screens */
+        display: none; 
     }
 
     .products {
@@ -108,10 +126,16 @@
     }
 
     .search-container {
-        width: 100%; /* Full width on mobile */
+        width: 100%;
+        display: none;
     }
 
     .products-container {
         width: 90%;
     }
+
+    .filters-dropdown {
+        display: flex;
+    }
+    
 }

@@ -1,6 +1,7 @@
 {
   "name": "e-commerce-site",
   "version": "0.1.0",
+  "homepage": "http://ecommerce.thomasfogarty.co.uk/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
