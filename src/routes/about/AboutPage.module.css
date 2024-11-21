@@ -16,7 +16,7 @@ body {
     z-index: 1;
     width: 100%;
     position: relative;
-    margin: 20px 0;
+    margin: 60px 0;
 }
 
 .hero-text-container {
@@ -94,68 +94,67 @@ body {
     }
 }
 
-/* Gallery images */
 .gallery-image-container {
     display: flex;
-    justify-content: center; /* Center the image */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center; 
     position: relative;
     width: 100%;
-    max-width: 1200px; /* Limit max width for larger screens */
-    margin: 0 auto; /* Center the container */
-    overflow: hidden; /* Hide overflow */
+    max-width: 1200px; 
+    margin: 0 auto; 
+    overflow: hidden; 
 }
 
 .gallery-image {
-    height: auto; /* Maintain aspect ratio */
-    width: 100%; /* Full width for responsiveness */
-    max-height: 700px; /* Limit max height */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    height: auto; 
+    width: 100%; 
+    max-height: 700px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .next-gallery-button,
 .prev-gallery-button {
     position: absolute;
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust positioning */
-    background: rgba(255, 255, 255, 0.7); /* Light background for buttons */
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: rgba(255, 255, 255, 0.7); 
     border: none;
-    border-radius: 50%; /* Circular buttons */
+    border-radius: 50%; 
     padding: 10px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.3s; /* Smooth transitions */
+    transition: background 0.3s, transform 0.3s; 
 }
 
 .next-gallery-button:hover,
 .prev-gallery-button:hover {
-    background: rgba(255, 255, 255, 1); /* Solid background on hover */
-    transform: scale(1.1); /* Slightly increase size on hover */
+    background: rgba(255, 255, 255, 1); 
+    transform: scale(1.1); 
 }
 
 .next-gallery-button {
-    right: 20px; /* Position right */
+    right: 20px; 
 }
 
 .prev-gallery-button {
-    left: 20px; /* Position left */
+    left: 20px; 
 }
 
 .prev-gallery-button > *,
 .next-gallery-button > * {
     font-size: 24px;
-    color: rgba(0, 0, 0, 0.6); /* Slightly darker color */
+    color: rgba(0, 0, 0, 0.6); 
 }
 
 .prev-gallery-button > *:hover,
 .next-gallery-button > *:hover {
-    color: rgba(0, 0, 0, 1); /* Fully dark on hover */
+    color: rgba(0, 0, 0, 1); 
 }
 
 .error-message {
-    color: red; /* Error message styling */
-    font-size: 1.2rem; /* Slightly larger font */
-    text-align: center; /* Center the text */
+    color: red; 
+    font-size: 1.2rem; 
+    text-align: center; 
     margin: 20px;
 }
 
