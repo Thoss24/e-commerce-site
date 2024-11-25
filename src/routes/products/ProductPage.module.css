@@ -7,12 +7,12 @@
 .page-container {
     display: flex;
     min-height: 100vh;
-    justify-content: center;
 }
 
 .products-container {
     display: block;
     width: 80%;
+    margin-left: auto;
 }
 
 .products {
